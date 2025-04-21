@@ -1,0 +1,13 @@
+.btn{
+    -fx-background-color : rgba(53, 76, 43, 0.91);
+}
+.background-center{
+    -fx-background-image: url("start.jpeg");
+    -fx-background-size: cover;
+}
+.background-right{
+    -fx-background-color: rgba(0, 0, 0, 0.93);
+}
+.btn:pressed{
+    -fx-background-color: #787171;
+}
