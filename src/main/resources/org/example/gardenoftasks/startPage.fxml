@@ -17,6 +17,11 @@
                         <Font name="Bauhaus 93" size="43.0" />
                      </font>
                   </Text>
+                  <Text fx:id="text" fill="#4e8650" layoutX="49.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="326.1367492675781">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Text>
                </children></AnchorPane>
             <JFXButton fx:id="switchToSignBtn" buttonType="RAISED" layoutX="356.0" layoutY="9.0" onAction="#switchToSignUp" prefHeight="47.0" prefWidth="81.0" ripplerFill="#29381f" style="-fx-background-color: #000000;" styleClass="btn" text="&lt; SIGN UP" textFill="WHITE">
                <font>
@@ -43,12 +48,12 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="signUpButton" layoutX="168.0" layoutY="354.0" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Sign up" textFill="#cccaca">
+            <JFXButton fx:id="signUpButton" layoutX="168.0" layoutY="383.0" onAction="#register" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Sign up" textFill="#cccaca">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="loginBUtton" layoutX="577.0" layoutY="353.0" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Login" textFill="#cccaca">
+            <JFXButton fx:id="loginBUtton" layoutX="577.0" layoutY="353.0" onAction="#login" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Login" textFill="#cccaca">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
@@ -68,6 +73,11 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXTextField>
+            <Text fx:id="text1" fill="#4e8650" layoutX="48.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="326.1367492675781">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
