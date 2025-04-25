@@ -1,13 +1,32 @@
-.btn{
-    -fx-background-color : rgba(53, 76, 43, 0.91);
+.btn {
+    -fx-background-color: rgba(53, 76, 43, 0.91);
 }
-.background-center{
+
+.background-center {
     -fx-background-image: url("start.jpeg");
     -fx-background-size: cover;
 }
-.background-right{
+
+.background-right {
     -fx-background-color: rgba(0, 0, 0, 0.93);
 }
-.btn:pressed{
+
+.btn:pressed {
     -fx-background-color: #787171;
+}
+
+.main-background {
+    -fx-background-color: rgba(0, 0, 0, 0.94);
+}
+.todo{
+    -fx-background-color: #1e5b3a;
+    -fx-background-radius: 20;
+}
+
+.toggle-button:selected {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-border-radius: 15px;
 }
