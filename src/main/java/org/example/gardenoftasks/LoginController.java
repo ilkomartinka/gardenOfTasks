@@ -3,27 +3,21 @@ package org.example.gardenoftasks;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import user.User;
 import user.UserManager;
-
 import java.io.IOException;
 
-public class SwitchController {
-    private TranslateTransition slide = new TranslateTransition();
-    private UserManager um = new UserManager();
+public class LoginController {
+    private final TranslateTransition slide;
+    private final UserManager um;
 
     @FXML
     private JFXButton switchToSignBtn;
+
     @FXML
     private Text a1;
 
@@ -31,7 +25,7 @@ public class SwitchController {
     private Text b1;
 
     @FXML
-    private JFXButton loginBUtton;
+    private JFXButton loginButton;
 
     @FXML
     private JFXTextField loginPassword;
@@ -56,17 +50,31 @@ public class SwitchController {
 
     @FXML
     private Text text;
+
     @FXML
     private Text text1;
+
     @FXML
     private JFXButton switchToLoginBtn;
 
-    public SwitchController() throws IOException, ClassNotFoundException {
+    private final Switcher switcher = new Switcher();
+
+    public LoginController() throws IOException, ClassNotFoundException {
+        this.um = new UserManager();
+        this.slide = new TranslateTransition();
     }
 
-
     @FXML
-    void switchToLogin(ActionEvent event) {
+    void initialize() {
+        signUpPassword.setVisible(false);
+        signUpPassword2.setVisible(false);
+        signUpUsername.setVisible(false);
+        switchToLoginBtn.setVisible(false);
+        b1.setVisible(false);
+        signUpButton.setVisible(false);
+    }
+    @FXML
+    void switchToLogin() {
         hideSignUpPage();
         slide.setDuration(Duration.seconds(0.3));
         slide.setNode(sliderPane);
@@ -76,7 +84,7 @@ public class SwitchController {
     }
 
     @FXML
-    void switchToSignUp(ActionEvent event) {
+    void switchToSignUp() {
         hideLoginPage();
         slide.setDuration(Duration.seconds(0.3));
         slide.setNode(sliderPane);
@@ -85,24 +93,12 @@ public class SwitchController {
         showSignUpPage();
     }
 
-    @FXML
-    void initialize() {
-        switchToLoginBtn.setVisible(false);
-        b1.setVisible(false);
-        signUpButton.setVisible(false);
-        signUpPassword.setVisible(false);
-        signUpPassword2.setVisible(false);
-        signUpUsername.setVisible(false);
-    }
 
     @FXML
-    void login(ActionEvent event) throws IOException, InterruptedException {
+    void login() throws IOException {
         if (um.login(loginUsername.getText(), loginPassword.getText()) != null) {
-            /*FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPage.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();*/
+            Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
+            switcher.switchToScene(stage, "mainPage.fxml");
             text.setVisible(true);
             text.setText("Login Successful");
         } else {
@@ -113,13 +109,16 @@ public class SwitchController {
 
 
     @FXML
-    void register(ActionEvent event) throws IOException {
+    void register() throws IOException {
+        text.setVisible(true);
         if (signUpPassword.getText().equals(signUpPassword2.getText())) {
-            um.register(signUpUsername.getText(), signUpPassword.getText());
-            text1.setVisible(true);
-            text1.setText("Signup successful");
+            if (!um.getUsers().containsKey(signUpUsername.getText())) {
+                um.register(signUpUsername.getText(), signUpPassword.getText());
+                text.setText("Signup successful, now you can login");
+            } else {
+                text.setText("User already exists");
+            }
         } else {
-            text.setVisible(true);
             text.setText("Passwords do not match");
         }
     }
@@ -128,7 +127,7 @@ public class SwitchController {
         text1.setVisible(false);
         text.setVisible(false);
         a1.setVisible(false);
-        loginBUtton.setVisible(false);
+        loginButton.setVisible(false);
         loginUsername.setVisible(false);
         loginPassword.setVisible(false);
         switchToSignBtn.setVisible(false);
@@ -148,7 +147,7 @@ public class SwitchController {
         switchToSignBtn.setVisible(true);
         loginPassword.setVisible(true);
         loginUsername.setVisible(true);
-        loginBUtton.setVisible(true);
+        loginButton.setVisible(true);
         a1.setVisible(true);
         text1.setVisible(false);
     }
