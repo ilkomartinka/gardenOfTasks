@@ -7,8 +7,8 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int coins;
-    private ArrayList<String> tasks;
-    private ArrayList<String> flowers;
+    private ArrayList<String> tasks;  //change
+    private ArrayList<String> flowers; //change
 
     public User(String username, String password) {
         this.username = username;
