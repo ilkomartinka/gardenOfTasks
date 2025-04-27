@@ -4,37 +4,33 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
-    public class HomePageController {
+import java.io.IOException;
 
-        @FXML
-        private Button gardenBtn;
+public class HomePageController {
+    Switcher switcher = new Switcher();
+    Stage stage = new Stage();
 
-        @FXML
-        private Button shopBtn;
+    @FXML
+    private Button gardenBtn;
 
-        @FXML
-        private Button toDoBtn;
+    @FXML
+    private Button shopBtn;
 
-        @FXML
-        void addTask(ActionEvent event) {
+    @FXML
+    private Button toDoBtn;
 
-        }
+    @FXML
+    void addTask(ActionEvent event) throws IOException {
+        switcher.switchToScene(stage,"addTaskPage.fxml");
+    }
 
-        @FXML
-        void switchToGarden(ActionEvent event) {
 
-        }
-
-        @FXML
-        void switchToShop(ActionEvent event) {
-
-        }
-
-        @FXML
-        void switchToTasks(ActionEvent event) {
-
-        }
+    @FXML
+    public void initialize() {
 
     }
+}
+
 

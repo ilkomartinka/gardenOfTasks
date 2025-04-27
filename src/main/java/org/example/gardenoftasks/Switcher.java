@@ -15,4 +15,7 @@ public class Switcher {
         stage.setScene(new Scene(root));
         stage.show();
     }
+    public void closeStage(Stage stage) {
+        stage.close();
+    }
 }

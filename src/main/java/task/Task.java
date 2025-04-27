@@ -5,11 +5,13 @@ import java.util.Objects;
 public class Task {
     private String taskName;
     private TaskType taskType;
+    private String description;
 
 
-    public Task(String taskName, TaskType taskType) {
+    public Task(String taskName, TaskType taskType, String description) {
         this.taskName = taskName;
         this.taskType = taskType;
+        this.description = description;
     }
 
     public String getTaskName() {
@@ -18,6 +20,10 @@ public class Task {
 
     public TaskType getTaskType() {
         return taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
     }
 
     @Override
