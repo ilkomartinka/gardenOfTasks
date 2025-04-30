@@ -1,8 +1,10 @@
 package task;
 
+import javafx.scene.Node;
+
 import java.util.Objects;
 
-public class Task {
+public class Task extends Node {
     private String taskName;
     private TaskType taskType;
     private String description;
@@ -36,5 +38,10 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hashCode(taskName);
+    }
+
+    @Override
+    public Node getStyleableNode() {
+        return super.getStyleableNode();
     }
 }

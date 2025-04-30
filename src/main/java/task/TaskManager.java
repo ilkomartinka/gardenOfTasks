@@ -26,11 +26,21 @@ public class TaskManager {
         return tasks;
     }
 
-    public void displayTask(Task task, VBox taskListVbox) {
+    public void displayTask(VBox vbox) {
+        for (Task task : tasks) {
+            HBox item = createTask(task);
+            vbox.getChildren().add(item);
+        }
+    }
+
+    public HBox createTask(Task task) {
         HBox taskItem = new HBox(10);
         CheckBox checkBox = new CheckBox();
         Label label = new Label(task.getTaskName());
-        if(task.getTaskType().equals(TaskType.COMPLETED)) {
+        if(task.getTaskType() == null){
+
+        }
+        if (task.getTaskType().equals(TaskType.COMPLETED)) {
             label.setStyle("-fx-strikethrough: true;");
             checkBox.setSelected(true);
         }
@@ -39,11 +49,10 @@ public class TaskManager {
                 task.setTaskType(TaskType.COMPLETED);
                 label.setStyle("-fx-font-size: 16px; -fx-strikethrough: true;");
             } else {
-                task.setTaskType(TaskType.TODO); // або твій тип
+                task.setTaskType(TaskType.TODO);
                 label.setStyle("-fx-font-size: 16px; -fx-strikethrough: false;");
             }
         });
-        taskItem.getChildren().addAll(checkBox, label);
-        taskListVbox.getChildren().add(taskItem);
+        return taskItem;
     }
 }
