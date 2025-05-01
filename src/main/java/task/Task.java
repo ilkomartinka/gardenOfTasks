@@ -1,15 +1,14 @@
 package task;
 
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Task implements Serializable {
-    private String taskName;
+    private final String taskName;
     private TaskType taskType;
-    private String description;
+    private final String description;
     private boolean done;
 
 
@@ -37,6 +36,10 @@ public class Task implements Serializable {
 
     public boolean isDone() {
         return done;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

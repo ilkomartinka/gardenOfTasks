@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class User implements Serializable {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
     private int coins;
-    private ArrayList<Task> tasks;  //change
-    private ArrayList<String> flowers; //change
+    private final ArrayList<Task> tasks;  //change
+    private final ArrayList<String> flowers; //change
 
     public User(String username, String password) {
         this.username = username;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class UserManager {
     private HashMap<String, User> users; //username, User
-    private File file = new File("users.dat");
+    private final File file = new File("users.dat");
 
     public UserManager() throws IOException, ClassNotFoundException {
         users = loadUsers();
@@ -23,10 +23,6 @@ public class UserManager {
         if (!users.containsKey(username)) {
             User user = new User(username, password);
             users.put(username, user);
-            /*try(BufferedWriter bw = new BufferedWriter(new FileWriter("users.txt", true))) {
-                bw.write(user.getUsername() + "," + user.getPassword());
-                bw.newLine();
-            }*/
             saveUsers();
             return true;
         }

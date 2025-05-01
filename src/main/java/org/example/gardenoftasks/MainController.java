@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class MainController {
     private final Switcher switcher = new Switcher();
-    private Stage stage = new Stage();
+    private final Stage stage = new Stage();
     private User currentUser;
 
     @FXML
