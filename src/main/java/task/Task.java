@@ -1,13 +1,16 @@
 package task;
 
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Task extends Node {
+public class Task implements Serializable {
     private String taskName;
     private TaskType taskType;
     private String description;
+    private boolean done;
 
 
     public Task(String taskName, TaskType taskType, String description) {
@@ -28,6 +31,14 @@ public class Task extends Node {
         this.taskType = taskType;
     }
 
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -41,7 +52,8 @@ public class Task extends Node {
     }
 
     @Override
-    public Node getStyleableNode() {
-        return super.getStyleableNode();
+    public String toString() {
+        CheckBox checkBox = new CheckBox();
+        return  checkBox + taskName + " " + taskType;
     }
 }

@@ -30,3 +30,9 @@
     -fx-border-width: 2px;
     -fx-border-radius: 15px;
 }
+.list-cell {
+    -fx-background-color: #1e5b3a;
+    -fx-padding: 10;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 1 0;
+}

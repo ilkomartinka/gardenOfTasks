@@ -1,36 +1,30 @@
 package org.example.gardenoftasks;
 
 import com.jfoenix.controls.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import task.Task;
 import task.TaskManager;
 import task.TaskType;
 
-import java.io.IOException;
 
 public class AddTaskController {
-    private final TaskManager tm;
-    Stage stage = new Stage();
-
-    public AddTaskController() {
-        this.tm = new TaskManager();
-    }
+    private final TaskManager taskManager = TaskManager.getInstance();
 
     @FXML
     private JFXTextArea descriptionTextArea;
 
-    @FXML
-    private JFXButton saveBtn;
 
     @FXML
     private JFXTextField taskTextField;
 
     @FXML
     private JFXComboBox<TaskType> taskTypeComboBox;
+
+    @FXML
+    private Text massageText;
+
 
 
     @FXML
@@ -40,18 +34,19 @@ public class AddTaskController {
 
 
     @FXML
-    void cancel() throws IOException {
-        stage.close();
+    void closeWindow()  {
+        Stage currentStage = (Stage) massageText.getScene().getWindow();
+        currentStage.close();
     }
+
     @FXML
-    public void saveTask(ActionEvent actionEvent) {
-        saveBtn.setOnAction(event -> {
-        Task task = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
-        tm.addTask(task);
+    public void saveTask()  {
+        taskManager.addTask(new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText()));
         taskTextField.clear();
         descriptionTextArea.clear();
-        stage.close();
-    });
+
+        closeWindow();
     }
+
 }
 

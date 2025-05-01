@@ -1,5 +1,7 @@
 package user;
 
+import task.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private int coins;
-    private ArrayList<String> tasks;  //change
+    private ArrayList<Task> tasks;  //change
     private ArrayList<String> flowers; //change
 
     public User(String username, String password) {
@@ -18,7 +20,7 @@ public class User implements Serializable {
         this.flowers = new ArrayList<>();
     }
 
-    public void addTask(String task) {
+    public void addTask(Task task) {
         tasks.add(task);
     }
     public void addFlower(String flower) {
@@ -41,7 +43,7 @@ public class User implements Serializable {
         return coins;
     }
 
-    public ArrayList<String> getTasks() {
+    public ArrayList<Task> getTasks() {
         return tasks;
     }
 
