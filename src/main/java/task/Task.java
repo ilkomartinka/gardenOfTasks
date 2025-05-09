@@ -16,6 +16,7 @@ public class Task implements Serializable {
         this.taskName = taskName;
         this.taskType = taskType;
         this.description = description;
+        this.done = false;
     }
 
     public String getTaskName() {
@@ -36,10 +37,6 @@ public class Task implements Serializable {
 
     public boolean isDone() {
         return done;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     @Override

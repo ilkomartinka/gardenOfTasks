@@ -1,15 +1,19 @@
 package task;
 
+import com.jfoenix.controls.JFXCheckBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-
-import java.util.HashSet;
+import javafx.scene.layout.HBox;
 
 public class TaskManager {
-    private final HashSet<Task> tasks;
+    private final ObservableList<Task> tasks;
     private static TaskManager instance;
 
     public TaskManager() {
-        this.tasks = new HashSet<>();
+        this.tasks = FXCollections.observableArrayList();
     }
 
     public void addTask(Task task) {
@@ -20,7 +24,7 @@ public class TaskManager {
         tasks.remove(task);
     }
 
-    public HashSet<Task> getTasks() {
+    public ObservableList<Task> getTasks() {
         return tasks;
     }
 
@@ -31,30 +35,8 @@ public class TaskManager {
         return instance;
     }
 
-    public void displayTasks(ListView<Task> taskListView) {
-        taskListView.getItems().setAll(tasks);
+    public void displayTasks(ListView<Task> taskList) {
+        taskList.setItems(tasks);
     }
 
-    /*public HBox createTask(Task task) {
-        CheckBox checkBox = new CheckBox();
-        Label label = new Label(task.getTaskName());
-
-
-        if (task.getTaskType().equals(TaskType.COMPLETED)) {
-            label.setStyle("-fx-strikethrough: true;");
-            checkBox.setSelected(true);
-        }
-        /*checkBox.setOnAction(event -> {
-            if (checkBox.isSelected()) {
-                task.setTaskType(TaskType.COMPLETED);
-                label.setStyle("-fx-font-size: 16px; -fx-strikethrough: true;");
-            } else {
-                task.setTaskType(TaskType.TODO);
-                label.setStyle("-fx-font-size: 16px; -fx-strikethrough: false;");
-            }
-        });
-        return taskItem;
-    }*/
-
-    }
-
+}

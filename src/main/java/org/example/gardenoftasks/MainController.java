@@ -2,17 +2,19 @@ package org.example.gardenoftasks;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import task.Task;
 import task.TaskManager;
-import task.TaskType;
 import user.User;
 
 import java.io.IOException;
@@ -39,18 +41,25 @@ public class MainController {
 
     @FXML
     void addTaskBtn() throws IOException {
-        switcher.switchToScene(stage, "addTaskPage.fxml");
+        switcher.switchToSceneUsingStage(stage, "addTaskPage.fxml");
         taskManager.displayTasks(taskList);
     }
 
+    @FXML
+    void goToGarden(ActionEvent event) throws IOException {
+        switcher.switchToSceneUsingEvent(event, "garden.fxml");
+    }
+
+    @FXML
+    void goToShop(ActionEvent event) throws IOException {
+        switcher.switchToSceneUsingEvent(event, "shop.fxml");
+    }
 
     @FXML
     public void initialize() {
-        if (taskList != null) {
-            massageText.setVisible(false);
-        }
         setupTaskListView();
     }
+
 
     private void setupTaskListView() {
         taskList.setCellFactory(listView -> new ListCell<>() {
@@ -58,9 +67,11 @@ public class MainController {
             protected void updateItem(Task task, boolean empty) {
                 super.updateItem(task, empty);
                 if (empty || task == null) {
+                    massageText.setVisible(true);
                     setGraphic(null);
                 } else {
                     setGraphic(createTask(task));
+                    massageText.setVisible(false);
                 }
             }
         });
@@ -70,46 +81,40 @@ public class MainController {
         Label taskTypeLabel = createTaskTypeLabel(task);
         Label titleLabel = createTaskLabel(task);
         JFXCheckBox checkBox = createCheckBox(task, titleLabel);
-
-        HBox taskLine = new HBox(10, checkBox, titleLabel, taskTypeLabel);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        HBox taskLine = new HBox(10, checkBox, titleLabel, spacer, taskTypeLabel);
         taskLine.setAlignment(Pos.CENTER_LEFT); // set position in the line
         return taskLine;
     }
 
     private Label createTaskTypeLabel(Task task) {
-        Label label = new Label(task.getTaskType().getDescription());
-        label.setMinWidth(350);
-        label.setStyle("-fx-font-weight: bold; -fx-text-fill: gray;");
-        label.setAlignment(Pos.BASELINE_RIGHT);
-        if(task.isDone()){
-            task.setTaskType(TaskType.COMPLETED);
-        }
+        Label label = new Label(task.getTaskType().toString());
+        label.setStyle("-fx-font-size: 16px;-fx-font-weight: bold; -fx-text-fill: black;");
         return label;
     }
 
     private Label createTaskLabel(Task task) {
         Label label = new Label(task.getTaskName());
-        label.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #000000;");
+        label.setStyle("-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #000000;");
         label.setWrapText(true); // allows text to go to a new line
         label.setAlignment(Pos.CENTER_LEFT);
-        if (task.isDone()) {
-            label.setStyle("-fx-strikethrough: true;");
-        }
+        label.setMaxWidth(Region.USE_COMPUTED_SIZE);
         return label;
     }
 
     private JFXCheckBox createCheckBox(Task task, Label titleLabel) {
         JFXCheckBox checkBox = new JFXCheckBox();
-        checkBox.setSelected(task.isDone());
         checkBox.setAlignment(Pos.CENTER_LEFT);
         checkBox.setOnAction(event -> {
-            if(checkBox.isSelected()) {
+            if (checkBox.isSelected()) {
                 titleLabel.setStyle("-fx-strikethrough: true");
-                task.setTaskType(TaskType.COMPLETED);
+                task.setDone(true);
             }
-            task.setDone(checkBox.isSelected());
+
         });
         return checkBox;
     }
+
 
 }

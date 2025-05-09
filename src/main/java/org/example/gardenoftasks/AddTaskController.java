@@ -10,7 +10,12 @@ import task.TaskType;
 
 
 public class AddTaskController {
-    private final TaskManager taskManager = TaskManager.getInstance();
+    private TaskManager taskManager = TaskManager.getInstance();
+    private MainController mainController;
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     @FXML
     private JFXTextArea descriptionTextArea;
@@ -26,7 +31,6 @@ public class AddTaskController {
     private Text massageText;
 
 
-
     @FXML
     public void initialize() {
         taskTypeComboBox.getItems().addAll(TaskType.values());
@@ -34,17 +38,16 @@ public class AddTaskController {
 
 
     @FXML
-    void closeWindow()  {
+    void closeWindow() {
         Stage currentStage = (Stage) massageText.getScene().getWindow();
         currentStage.close();
     }
 
     @FXML
-    public void saveTask()  {
-        taskManager.addTask(new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText()));
-        taskTextField.clear();
-        descriptionTextArea.clear();
-
+    public void saveTask() {
+        Task newTask = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
+        taskManager.addTask(newTask);
+       //
         closeWindow();
     }
 

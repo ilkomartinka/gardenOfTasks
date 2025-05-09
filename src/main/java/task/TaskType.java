@@ -1,20 +1,19 @@
 package task;
 
 public enum TaskType {
+    // School-related tasks
+    HOMEWORK,
+    STUDY,
+    PROJECT,
+    EXAM,
 
-    TODO("TO DO"),
-    IN_PROGRESS("IN PROGRESS"),
-    COMPLETED("COMPLETED");
+    // Work-related tasks
+    WORK_TASK,
+    MEETING,
+    DEADLINE,
 
-    private final String description;
-
-    TaskType(String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-
+    // Personal tasks
+    SELF_CARE,
+    EXERCISE,
+    HOBBY
 }

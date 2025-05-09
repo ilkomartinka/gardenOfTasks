@@ -33,6 +33,24 @@
 .list-cell {
     -fx-background-color: #1e5b3a;
     -fx-padding: 10;
-    -fx-border-color: #000000;
-    -fx-border-width: 0 0 1 0;
+}
+.combo-box {
+    -fx-padding: 5 10;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(three-pass-box, rgba(46,125,50,0.15), 6, 0, 0, 2);
+}
+
+.combo-box .list-cell {
+    -fx-padding: 6 10;
+    -fx-border-radius: 15;
+    -fx-background-color: rgba(0, 0, 0, 0.84);
+    -fx-text-fill: #ffffff;
+}
+.combo-box .list-cell:hover{
+    -fx-text-fill: black;
+}
+
+.anchor-pane{
+    -fx-background-color: rgba(61, 96, 49, 0.91);
+    -fx-background-radius: 15px;
 }
