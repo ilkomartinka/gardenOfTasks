@@ -98,7 +98,7 @@ public class LoginController {
     void login() throws IOException {
         if (um.login(loginUsername.getText(), loginPassword.getText()) != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
-            switcher.switchToSceneUsingStage(stage, "mainPage.fxml");
+            switcher.switchToScene(stage, "mainPage.fxml");
             text.setVisible(true);
             text.setText("Login Successful");
         } else {

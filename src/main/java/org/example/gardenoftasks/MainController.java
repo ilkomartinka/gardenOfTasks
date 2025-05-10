@@ -2,7 +2,6 @@ package org.example.gardenoftasks;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Pos;
@@ -41,18 +40,18 @@ public class MainController {
 
     @FXML
     void addTaskBtn() throws IOException {
-        switcher.switchToSceneUsingStage(stage, "addTaskPage.fxml");
+        switcher.switchToScene(stage, "addTaskPage.fxml");
         taskManager.displayTasks(taskList);
     }
 
     @FXML
-    void goToGarden(ActionEvent event) throws IOException {
-        switcher.switchToSceneUsingEvent(event, "garden.fxml");
+    void goToGarden() throws IOException {
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "garden.fxml");
     }
 
     @FXML
-    void goToShop(ActionEvent event) throws IOException {
-        switcher.switchToSceneUsingEvent(event, "shop.fxml");
+    void goToShop() throws IOException {
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "shop.fxml");
     }
 
     @FXML
