@@ -1,12 +1,9 @@
-package task;
+package manager;
 
-import com.jfoenix.controls.JFXCheckBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
+import model.Task;
 
 public class TaskManager {
     private final ObservableList<Task> tasks;

@@ -12,14 +12,15 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import task.Task;
-import task.TaskManager;
-import user.User;
+import model.Task;
+import manager.TaskManager;
+import model.User;
+import util.ViewSwitcher;
 
 import java.io.IOException;
 
 public class MainController {
-    private final Switcher switcher = new Switcher();
+    private final ViewSwitcher switcher = new ViewSwitcher();
     private final Stage stage = new Stage();
     private User currentUser;
 
@@ -46,12 +47,12 @@ public class MainController {
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "garden.fxml");
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml");
     }
 
     @FXML
     void goToShop() throws IOException {
-        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "shop.fxml");
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml");
     }
 
     @FXML

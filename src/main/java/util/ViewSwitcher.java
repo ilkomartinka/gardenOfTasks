@@ -1,4 +1,4 @@
-package org.example.gardenoftasks;
+package util;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Switcher {
+public class ViewSwitcher {
     // Switch scene using given FXML file and Stage
     public  void switchToScene(Stage stage, String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Switcher.class.getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(ViewSwitcher.class.getResource(fxml));
         Parent root = fxmlLoader.load();
         stage.setScene(new Scene(root));
         stage.show();

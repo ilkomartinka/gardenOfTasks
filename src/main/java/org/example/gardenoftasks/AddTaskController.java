@@ -4,9 +4,9 @@ import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import task.Task;
-import task.TaskManager;
-import task.TaskType;
+import model.Task;
+import manager.TaskManager;
+import model.TaskType;
 
 
 public class AddTaskController {

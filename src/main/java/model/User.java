@@ -1,6 +1,4 @@
-package user;
-
-import task.Task;
+package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

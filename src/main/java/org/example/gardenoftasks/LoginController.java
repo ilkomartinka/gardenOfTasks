@@ -8,7 +8,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import user.UserManager;
+import manager.UserManager;
+import util.ViewSwitcher;
+
 import java.io.IOException;
 
 public class LoginController {
@@ -57,7 +59,7 @@ public class LoginController {
     @FXML
     private JFXButton switchToLoginBtn;
 
-    private final Switcher switcher = new Switcher();
+    private final ViewSwitcher switcher = new ViewSwitcher();
 
     public LoginController() throws IOException, ClassNotFoundException {
         this.um = new UserManager();
@@ -98,7 +100,7 @@ public class LoginController {
     void login() throws IOException {
         if (um.login(loginUsername.getText(), loginPassword.getText()) != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
-            switcher.switchToScene(stage, "mainPage.fxml");
+            switcher.switchToScene(stage, "/org/example/gardenoftasks/mainPage.fxml");
             text.setVisible(true);
             text.setText("Login Successful");
         } else {
