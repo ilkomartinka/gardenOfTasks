@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="219.0" styleClass="plant-item" stylesheets="@../../../assets/stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="-6.0" layoutY="-3.0" prefHeight="222.0" prefWidth="226.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="48.0" prefWidth="236.0">
+               <children>
+                  <Label fx:id="nameLabel" prefHeight="42.0" prefWidth="211.0" text="Focusa" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="25.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="28.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="priceLabel" prefHeight="58.0" prefWidth="139.0" text="3$" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font name="Cambria Bold" size="23.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <ImageView fx:id="imageView" fitHeight="171.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/plant1.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="30.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -82,7 +82,7 @@
                         <Insets left="40.0" />
                      </VBox.margin>
                      <image>
-                        <Image url="@../../../../../../../../Downloads/ChatGPT%20Image%2010.%205.%202025%2023_15_04.png" />
+                        <Image url="@../../../assets/plant1.png" />
                      </image>
                   </ImageView>
                   <JFXButton fx:id="buyBtn" prefHeight="41.0" prefWidth="280.0" styleClass="style" text="BUY" textAlignment="CENTER" textFill="WHITE">
@@ -101,13 +101,13 @@
       </AnchorPane>
       <HBox alignment="CENTER" layoutX="386.0" layoutY="8.0" prefHeight="634.0" prefWidth="580.0" stylesheets="@../../../assets/stylesheet.css">
          <children>
-            <ScrollPane prefHeight="602.0" prefWidth="564.0" stylesheets="@../../../assets/stylesheet.css">
+            <ScrollPane fx:id="scroll" prefHeight="602.0" prefWidth="564.0" stylesheets="@../../../assets/stylesheet.css">
                <styleClass>
                   <String fx:value="transparent" />
                   <String fx:value="viewport" />
                </styleClass>
                <content>
-                  <GridPane prefHeight="0.0" prefWidth="0.0">
+                  <GridPane fx:id="grid" prefHeight="0.0" prefWidth="0.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
