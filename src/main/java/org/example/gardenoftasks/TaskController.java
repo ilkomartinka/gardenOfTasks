@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -19,7 +20,7 @@ import util.ViewSwitcher;
 
 import java.io.IOException;
 
-public class MainController {
+public class TaskController {
     private final ViewSwitcher switcher = new ViewSwitcher();
     private final Stage stage = new Stage();
     private User currentUser;
@@ -34,14 +35,18 @@ public class MainController {
     private Button toDoBtn;
     @FXML
     private JFXListView<Task> taskList;
+
     @FXML
     private Text massageText;
+
+    @FXML
+    private Label usersCoins;
 
     private final TaskManager taskManager = TaskManager.getInstance();
 
     @FXML
     void addTaskBtn() throws IOException {
-        switcher.switchToScene(stage, "addTaskPage.fxml");
+        switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml");
         taskManager.displayTasks(taskList);
     }
 
@@ -81,10 +86,14 @@ public class MainController {
         Label taskTypeLabel = createTaskTypeLabel(task);
         Label titleLabel = createTaskLabel(task);
         JFXCheckBox checkBox = createCheckBox(task, titleLabel);
+        Label rewardLabel = createRewardLabel(task);
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
-        HBox taskLine = new HBox(10, checkBox, titleLabel, spacer, taskTypeLabel);
+        Region spaceBetween = new Region();
+        HBox.setHgrow(spaceBetween, Priority.ALWAYS);
+        HBox taskLine = new HBox(10, checkBox, titleLabel, spacer, taskTypeLabel, spaceBetween, rewardLabel);
         taskLine.setAlignment(Pos.CENTER_LEFT); // set position in the line
+
         return taskLine;
     }
 
@@ -96,7 +105,7 @@ public class MainController {
 
     private Label createTaskLabel(Task task) {
         Label label = new Label(task.getTaskName());
-        label.setStyle("-fx-font-size: 17px; -fx-font-weight: bold; -fx-text-fill: #000000;");
+        label.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #000000;");
         label.setWrapText(true); // allows text to go to a new line
         label.setAlignment(Pos.CENTER_LEFT);
         label.setMaxWidth(Region.USE_COMPUTED_SIZE);
@@ -109,11 +118,21 @@ public class MainController {
         checkBox.setOnAction(event -> {
             if (checkBox.isSelected()) {
                 titleLabel.setStyle("-fx-strikethrough: true");
+                currentUser.addCoins(task.getTaskType().getReward());
+                //usersCoins.setText();
                 task.setDone(true);
             }
 
         });
         return checkBox;
+    }
+
+    private Label createRewardLabel(Task task) {
+        Label label = new Label();
+        label.setText(String.valueOf(task.getTaskType().getReward()));
+        label.setStyle("-fx-font-weight: bold; -fx-text-fill: #000000; -fx-font-size: 18px;");
+        label.setAlignment(Pos.BASELINE_RIGHT);
+        return label;
     }
 
 

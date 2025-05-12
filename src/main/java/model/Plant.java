@@ -34,4 +34,7 @@ public class Plant {
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
     }
+    public String getImgSrc() {
+        return imgSrc;
+    }
 }

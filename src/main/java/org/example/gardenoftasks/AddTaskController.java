@@ -11,9 +11,9 @@ import model.TaskType;
 
 public class AddTaskController {
     private TaskManager taskManager = TaskManager.getInstance();
-    private MainController mainController;
+    private TaskController mainController;
 
-    public void setMainController(MainController mainController) {
+    public void setMainController(TaskController mainController) {
         this.mainController = mainController;
     }
 

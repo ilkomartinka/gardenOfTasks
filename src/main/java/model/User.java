@@ -29,6 +29,10 @@ public class User implements Serializable {
         this.coins += coins;
     }
 
+    public void removeCoins(int coins) {
+        this.coins -= coins;
+    }
+
     public String getUsername() {
         return username;
     }

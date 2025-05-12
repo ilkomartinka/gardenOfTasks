@@ -55,7 +55,7 @@
 }
 
 .anchor-pane {
-    -fx-background-color: rgba(61, 96, 49, 0.91);
+    -fx-background-color: rgba(30, 91, 58, 0.92);
     -fx-background-radius: 15px;
 }
 
@@ -65,9 +65,7 @@
 }
 
 .plant-item{
-    -fx-background-color: rgba(53, 76, 43, 0.91);
+    -fx-background-color: rgb(16, 15, 15);
     -fx-background-radius: 30;
 }
-.buy-button{
 
-}
