@@ -1,28 +1,31 @@
 package model;
 
+import javafx.scene.control.Label;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class User implements Serializable {
     private final String username;
     private final String password;
     private int coins;
     private final ArrayList<Task> tasks;  //change
-    private final ArrayList<String> flowers; //change
+    private final HashSet<Plant> plants; //change
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.coins = 0;
         this.tasks = new ArrayList<>();
-        this.flowers = new ArrayList<>();
+        this.plants = new HashSet<>();
     }
 
     public void addTask(Task task) {
         tasks.add(task);
     }
-    public void addFlower(String flower) {
-        flowers.add(flower);
+    public void addPLant(Plant plant) {
+        plants.add(plant);
     }
 
     public void addCoins(int coins) {
@@ -44,13 +47,16 @@ public class User implements Serializable {
     public int getCoins() {
         return coins;
     }
+    public void updateCoins(Label usersCoins){
+        usersCoins.setText(String.valueOf(getCoins()));
+    }
 
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public ArrayList<String> getFlowers() {
-        return flowers;
+    public HashSet<Plant> getPlants() {
+        return plants;
     }
 
     @Override
@@ -60,7 +66,7 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", coins=" + coins +
                 ", tasks=" + tasks +
-                ", flowers=" + flowers +
+                ", plants=" + plants +
                 '}';
     }
 }

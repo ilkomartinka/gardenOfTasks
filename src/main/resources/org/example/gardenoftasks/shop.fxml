@@ -55,7 +55,7 @@
                   </JFXToolbar>
                </children>
             </AnchorPane>
-            <VBox layoutX="46.0" layoutY="163.0" prefHeight="272.0" prefWidth="278.0">
+            <VBox layoutX="46.0" layoutY="149.0" prefHeight="272.0" prefWidth="278.0">
                <children>
                   <HBox fx:id="chosenPlantCard" prefHeight="46.0" prefWidth="278.0">
                      <children>
@@ -67,7 +67,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="plantPriceLabel" text="3" textFill="WHITE">
+                        <Label fx:id="plantPriceLabel" prefHeight="31.0" prefWidth="47.0" text="3" textFill="WHITE">
                            <font>
                               <Font name="Cambria Bold" size="25.0" />
                            </font>
@@ -94,21 +94,36 @@
             </VBox>
             <Line endX="239.4000244140625" layoutX="121.0" layoutY="100.0" startX="-100.0" stroke="WHITE" />
             <Line endX="239.4000244140625" layoutX="121.0" layoutY="565.0" startX="-100.0" stroke="WHITE" />
-            <JFXButton fx:id="buyBtn" layoutX="46.0" layoutY="480.0" prefHeight="50.0" prefWidth="289.0" styleClass="style" text="BUY" textAlignment="CENTER" textFill="WHITE">
+            <JFXButton fx:id="buyBtn" layoutX="46.0" layoutY="458.0" onAction="#buyPlant" prefHeight="50.0" prefWidth="289.0" styleClass="style" text="BUY" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Bauhaus 93" size="27.0" />
                </font>
             </JFXButton>
             <Label layoutX="127.0" layoutY="101.0" prefHeight="46.0" prefWidth="76.0" text="Coins: " textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Bauhaus 93" size="20.0" />
+                  <Font name="Bauhaus 93" size="22.0" />
                </font>
             </Label>
-            <Label fx:id="usersCoins" layoutX="203.0" layoutY="116.0" prefHeight="18.0" prefWidth="33.0">
+            <Label fx:id="usersCoins" layoutX="203.0" layoutY="116.0" prefHeight="18.0" prefWidth="33.0" textFill="WHITE">
+               <font>
+                  <Font name="Bauhaus 93" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="usersCoins1" layoutX="188.0" layoutY="110.0" prefHeight="18.0" prefWidth="33.0" textFill="WHITE">
+               <font>
+                  <Font name="Cambria" size="22.0" />
+               </font>
+            </Label>
+            <Text fill="WHITE" layoutX="230.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
                <font>
                   <Font name="Cambria Bold" size="20.0" />
                </font>
-            </Label>
+            </Text>
+            <Text fx:id="gratulationText" fill="WHITE" layoutX="28.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gratulation, you buyed a plant!" wrappingWidth="330.40000000000003">
+               <font>
+                  <Font name="Cambria Bold" size="23.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <HBox alignment="CENTER" layoutX="391.0" layoutY="8.0" prefHeight="679.0" prefWidth="691.0" stylesheets="@../../../assets/stylesheet.css">

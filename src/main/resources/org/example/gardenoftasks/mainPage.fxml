@@ -95,7 +95,7 @@
                         <Font name="Cambria Bold" size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="usersCoin" layoutX="6.0" layoutY="9.0" prefHeight="18.0" prefWidth="39.0" textFill="#7fff90">
+                  <Label fx:id="usersCoins" layoutX="15.0" layoutY="3.0" prefHeight="18.0" prefWidth="39.0" textAlignment="CENTER" textFill="#7fff90">
                      <font>
                         <Font name="Cambria Bold" size="20.0" />
                      </font>
