@@ -9,6 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import manager.UserManager;
+import model.User;
 import util.ViewSwitcher;
 
 import java.io.IOException;
@@ -98,9 +99,10 @@ public class LoginController {
 
     @FXML
     void login() throws IOException {
-        if (um.login(loginUsername.getText(), loginPassword.getText()) != null) {
+        User user = um.login(loginUsername.getText(), loginPassword.getText());
+        if (user != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
-            switcher.switchToScene(stage, "/org/example/gardenoftasks/mainPage.fxml");
+            switcher.switchToScene(stage, "/org/example/gardenoftasks/mainPage.fxml",user);
             text.setVisible(true);
             text.setText("Login Successful");
         } else {

@@ -44,27 +44,32 @@ public class TaskController {
 
     private final TaskManager taskManager = TaskManager.getInstance();
 
+
+
     @FXML
     void addTaskBtn() throws IOException {
-        switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml");
+        switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml", currentUser);
         taskManager.displayTasks(taskList);
     }
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml");
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml",currentUser);
     }
 
     @FXML
     void goToShop() throws IOException {
-        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml");
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml",currentUser);
     }
 
     @FXML
     public void initialize() {
         setupTaskListView();
     }
-
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        user.updateCoins(usersCoins);
+    }
 
     private void setupTaskListView() {
         taskList.setCellFactory(listView -> new ListCell<>() {
@@ -93,7 +98,6 @@ public class TaskController {
         HBox.setHgrow(spaceBetween, Priority.ALWAYS);
         HBox taskLine = new HBox(10, checkBox, titleLabel, spacer, taskTypeLabel, spaceBetween, rewardLabel);
         taskLine.setAlignment(Pos.CENTER_LEFT); // set position in the line
-
         return taskLine;
     }
 
@@ -119,7 +123,7 @@ public class TaskController {
             if (checkBox.isSelected()) {
                 titleLabel.setStyle("-fx-strikethrough: true");
                 currentUser.addCoins(task.getTaskType().getReward());
-                //usersCoins.setText();
+                usersCoins.setText(String.valueOf(currentUser.getCoins()));
                 task.setDone(true);
             }
 
@@ -134,6 +138,7 @@ public class TaskController {
         label.setAlignment(Pos.BASELINE_RIGHT);
         return label;
     }
+
 
 
 }
