@@ -124,6 +124,11 @@
                   <Font name="Cambria Bold" size="23.0" />
                </font>
             </Text>
+            <Text fx:id="errorMessage" fill="WHITE" layoutX="38.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You don’t have enough money." wrappingWidth="330.40000000000003">
+               <font>
+                  <Font name="Cambria Bold" size="23.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <HBox alignment="CENTER" layoutX="391.0" layoutY="8.0" prefHeight="679.0" prefWidth="691.0" stylesheets="@../../../assets/stylesheet.css">

@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.User;
+import org.example.gardenoftasks.GardenController;
 import org.example.gardenoftasks.ShopController;
 import org.example.gardenoftasks.TaskController;
 
@@ -20,6 +21,8 @@ public class ViewSwitcher {
             ((TaskController) controller).setCurrentUser(user);
         }else if(controller instanceof ShopController){
             ((ShopController) controller).setCurrentUser(user);
+        }else if(controller instanceof GardenController){
+            ((GardenController)controller).setCurrentUser(user);
         }
         stage.setScene(new Scene(root));
         stage.show();

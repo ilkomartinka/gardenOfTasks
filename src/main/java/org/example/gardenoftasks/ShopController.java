@@ -73,9 +73,15 @@ public class ShopController {
     @FXML
     private Text gratulationText;
 
+    @FXML
+    private Text errorMessage;
+
+    private GardenController gardenController;
+
 
     public ShopController() {
         switcher = new ViewSwitcher();
+        gardenController = new GardenController();
     }
 
     @FXML
@@ -129,6 +135,7 @@ public class ShopController {
         int column = 0;
         int row = 1;
         gratulationText.setVisible(false);
+        errorMessage.setVisible(false);
         for (int i = 0; i < plants.size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/gardenoftasks/plant.fxml"));
@@ -155,11 +162,16 @@ public class ShopController {
 
     @FXML
     void buyPlant() {
-        currentUser.removeCoins(getChosenPlant().getPrice());
-        usersCoins.setText(String.valueOf(currentUser.getCoins()));
-        currentUser.addPLant(chosenPlant);
-        gratulationText.setVisible(true);
-        currentUser.updateCoins(usersCoins);
+        if(currentUser.getCoins() >= chosenPlant.getPrice()) {
+            currentUser.removeCoins(getChosenPlant().getPrice());
+            usersCoins.setText(String.valueOf(currentUser.getCoins()));
+            currentUser.addPLant(chosenPlant);
+            gratulationText.setVisible(true);
+            currentUser.updateCoins(usersCoins);
+        }else{
+            errorMessage.setVisible(true);
+        }
+
     }
 
     public void setCurrentUser(User user) {
