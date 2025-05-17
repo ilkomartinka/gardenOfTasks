@@ -5,10 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import model.Plant;
-
-import java.util.Objects;
 
 
 public class PlantController {
@@ -25,11 +22,10 @@ public class PlantController {
     @FXML
     private AnchorPane plantPane;
 
-
     private Plant plant;
 
 
-    public void setData(Plant plant, ShopController shopController) {
+    public void setPlant(Plant plant, ShopController shopController) {
         this.plant = plant;
         nameLabel.setText(plant.getName());
         priceLabel.setText(String.valueOf(plant.getPrice()));

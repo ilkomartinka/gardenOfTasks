@@ -1,6 +1,7 @@
 package org.example.gardenoftasks;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -13,10 +14,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Plant;
+import model.User;
 import util.ViewSwitcher;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -61,6 +66,13 @@ public class ShopController {
 
     private ArrayList<Plant> plants;
 
+    private User currentUser;
+
+    private Plant chosenPlant;
+
+    @FXML
+    private Text gratulationText;
+
 
     public ShopController() {
         switcher = new ViewSwitcher();
@@ -68,171 +80,61 @@ public class ShopController {
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml");
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml", currentUser);
     }
 
     @FXML
     void goToHome() throws IOException {
-        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenoftasks/mainPage.fxml");
+        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenoftasks/mainPage.fxml", currentUser);
     }
 
     public ArrayList<Plant> getPlants() {
+        plants = loadPlants();
+        return plants;
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private ArrayList<Plant> loadPlants() {
         plants = new ArrayList<>();
-
-        plant = new Plant();
-        plant.setName("Focusa");
-        plant.setPrice(3);
-        plant.setImgSrc("/assets/plant1.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Lilly");
-        plant.setPrice(15);
-        plant.setImgSrc("/assets/plant2.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Bloomy");
-        plant.setPrice(10);
-        plant.setImgSrc("/assets/plant3.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Alurea");
-        plant.setPrice(5);
-        plant.setImgSrc("/assets/plant4.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Velina");
-        plant.setPrice(5);
-        plant.setImgSrc("/assets/plant4.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Lilure");
-        plant.setPrice(5);
-        plant.setImgSrc("/assets/plant5.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Zaflora");
-        plant.setPrice(5);
-        plant.setImgSrc("/assets/plant6.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Bloomera");
-        plant.setPrice(15);
-        plant.setImgSrc("/assets/plant7.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Brillora");
-        plant.setPrice(10);
-        plant.setImgSrc("/assets/plant8.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Sunelle");
-        plant.setPrice(10);
-        plant.setImgSrc("/assets/plant9.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Jollia");
-        plant.setPrice(8);
-        plant.setImgSrc("/assets/plant10.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Viveli");
-        plant.setPrice(5);
-        plant.setImgSrc("/assets/plant11.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Serafina");
-        plant.setPrice(8);
-        plant.setImgSrc("/assets/plant12.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Elorine");
-        plant.setPrice(11);
-        plant.setImgSrc("/assets/plant13.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Camirelle");
-        plant.setPrice(15);
-        plant.setImgSrc("/assets/plant14.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Bloomy");
-        plant.setPrice(13);
-        plant.setImgSrc("/assets/plant15.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Rosmara");
-        plant.setPrice(18);
-        plant.setImgSrc("/assets/plant16.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Thistelle");
-        plant.setPrice(15);
-        plant.setImgSrc("/assets/plant17.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Ariosa");
-        plant.setPrice(20);
-        plant.setImgSrc("/assets/plant18.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Zephyra");
-        plant.setPrice(25);
-        plant.setImgSrc("/assets/plant19.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Sunbloom");
-        plant.setPrice(25);
-        plant.setImgSrc("/assets/plant20.png");
-        plants.add(plant);
-
-        plant = new Plant();
-        plant.setName("Velina");
-        plant.setPrice(30);
-        plant.setImgSrc("/assets/plant21.png");
-        plants.add(plant);
-
+        try (BufferedReader br = new BufferedReader(new FileReader("plants.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                String plantName = parts[0];
+                int price = Integer.parseInt(parts[1]);
+                String image = parts[2];
+                plants.add(new Plant(plantName, price, image));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return plants;
     }
 
     public void setChosenPlant(Plant plant) {
+        this.chosenPlant = plant;
         plantNameLabel.setText(plant.getName());
         plantPriceLabel.setText(String.valueOf(plant.getPrice()));
         Image image = new Image(getClass().getResourceAsStream(plant.getImgSrc()));
         plantImage.setImage(image);
     }
 
+    public Plant getChosenPlant() {
+        return chosenPlant;
+    }
 
     @FXML
     void initialize() {
         plants = getPlants();
         int column = 0;
         int row = 1;
+        gratulationText.setVisible(false);
         for (int i = 0; i < plants.size(); i++) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/gardenoftasks/plant.fxml"));
                 AnchorPane pane = fxmlLoader.load();
                 PlantController plantController = fxmlLoader.getController();
-                plantController.setData(plants.get(i), this);
+                plantController.setPlant(plants.get(i), this);
                 grid.add(pane, column++, row);
                 GridPane.setMargin(pane, new Insets(10));
                 if (column == 3) {
@@ -250,4 +152,19 @@ public class ShopController {
         grid.setMaxWidth(Region.USE_PREF_SIZE);
         grid.setMaxHeight(Region.USE_PREF_SIZE);
     }
+
+    @FXML
+    void buyPlant() {
+        currentUser.removeCoins(getChosenPlant().getPrice());
+        usersCoins.setText(String.valueOf(currentUser.getCoins()));
+        currentUser.addPLant(chosenPlant);
+        gratulationText.setVisible(true);
+        currentUser.updateCoins(usersCoins);
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+        currentUser.updateCoins(usersCoins);
+    }
+
 }
