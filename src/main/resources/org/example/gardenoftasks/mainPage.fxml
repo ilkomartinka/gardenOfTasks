@@ -18,7 +18,7 @@
          <children>
             <AnchorPane layoutX="15.0" layoutY="22.0" prefHeight="592.0" prefWidth="555.0" styleClass="style" stylesheets="@../../../assets/stylesheet.css">
                <children>
-                  <Text fx:id="massageText" layoutX="54.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No tasks, yet!" textAlignment="CENTER" wrappingWidth="450.9367141723633">
+                  <Text fx:id="messageText" layoutX="53.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="No tasks, yet!" textAlignment="CENTER" wrappingWidth="450.9367141723633">
                      <font>
                         <Font name="Berlin Sans FB" size="23.0" />
                      </font>

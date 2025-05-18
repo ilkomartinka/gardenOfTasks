@@ -7,15 +7,11 @@ import javafx.stage.Stage;
 import model.Task;
 import manager.TaskManager;
 import model.TaskType;
+import model.User;
 
 
 public class AddTaskController {
-    private TaskManager taskManager = TaskManager.getInstance();
-    private TaskController mainController;
-
-    public void setMainController(TaskController mainController) {
-        this.mainController = mainController;
-    }
+    private User currentUser;
 
     @FXML
     private JFXTextArea descriptionTextArea;
@@ -46,9 +42,12 @@ public class AddTaskController {
     @FXML
     public void saveTask() {
         Task newTask = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
-        taskManager.addTask(newTask);
-       //
+        currentUser.addTask(newTask);
         closeWindow();
+    }
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
     }
 
 }

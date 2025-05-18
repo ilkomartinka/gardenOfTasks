@@ -19,6 +19,7 @@ import model.User;
 import util.ViewSwitcher;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TaskController {
     private final ViewSwitcher switcher = new ViewSwitcher();
@@ -37,38 +38,39 @@ public class TaskController {
     private JFXListView<Task> taskList;
 
     @FXML
-    private Text massageText;
+    private Text messageText;
 
     @FXML
     private Label usersCoins;
 
     private final TaskManager taskManager = TaskManager.getInstance();
-
+    private ArrayList<Task> userTasks;
 
 
     @FXML
     void addTaskBtn() throws IOException {
         switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml", currentUser);
-        taskManager.displayTasks(taskList);
     }
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml",currentUser);
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml", currentUser);
     }
 
     @FXML
     void goToShop() throws IOException {
-        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml",currentUser);
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml", currentUser);
     }
 
     @FXML
     public void initialize() {
         setupTaskListView();
     }
+
     public void setCurrentUser(User user) {
         this.currentUser = user;
         user.updateCoins(usersCoins);
+        refreshTaskList();
     }
 
     private void setupTaskListView() {
@@ -77,11 +79,11 @@ public class TaskController {
             protected void updateItem(Task task, boolean empty) {
                 super.updateItem(task, empty);
                 if (empty || task == null) {
-                    massageText.setVisible(true);
+                    messageText.setVisible(true);
                     setGraphic(null);
                 } else {
                     setGraphic(createTask(task));
-                    massageText.setVisible(false);
+                    messageText.setVisible(false);
                 }
             }
         });
@@ -139,6 +141,10 @@ public class TaskController {
         return label;
     }
 
-
-
+    private void refreshTaskList() {
+        if (currentUser == null) return;        // запобіжник
+        taskList.getItems().setAll(currentUser.getTasks());
+        messageText.setVisible(taskList.getItems().isEmpty());
+    }
 }
+

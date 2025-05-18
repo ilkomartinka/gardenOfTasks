@@ -21,10 +21,6 @@ public class TaskManager {
         tasks.remove(task);
     }
 
-    public ObservableList<Task> getTasks() {
-        return tasks;
-    }
-
     public static TaskManager getInstance() {
         if (instance == null) {
             instance = new TaskManager();

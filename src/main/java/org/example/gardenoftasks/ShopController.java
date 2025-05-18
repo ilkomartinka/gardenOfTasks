@@ -76,12 +76,8 @@ public class ShopController {
     @FXML
     private Text errorMessage;
 
-    private GardenController gardenController;
-
-
     public ShopController() {
         switcher = new ViewSwitcher();
-        gardenController = new GardenController();
     }
 
     @FXML
