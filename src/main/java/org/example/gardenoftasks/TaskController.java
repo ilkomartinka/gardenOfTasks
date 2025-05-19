@@ -44,12 +44,12 @@ public class TaskController {
     private Label usersCoins;
 
     private final TaskManager taskManager = TaskManager.getInstance();
-    private ArrayList<Task> userTasks;
 
 
     @FXML
     void addTaskBtn() throws IOException {
         switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml", currentUser);
+        taskManager.displayTasks(taskList);
     }
 
     @FXML
@@ -70,7 +70,7 @@ public class TaskController {
     public void setCurrentUser(User user) {
         this.currentUser = user;
         user.updateCoins(usersCoins);
-        refreshTaskList();
+        taskManager.displayTasks(taskList);
     }
 
     private void setupTaskListView() {
@@ -89,7 +89,7 @@ public class TaskController {
         });
     }
 
-    private Node createTask(Task task) {
+    public Node createTask(Task task) {
         Label taskTypeLabel = createTaskTypeLabel(task);
         Label titleLabel = createTaskLabel(task);
         JFXCheckBox checkBox = createCheckBox(task, titleLabel);
@@ -141,10 +141,5 @@ public class TaskController {
         return label;
     }
 
-    private void refreshTaskList() {
-        if (currentUser == null) return;        // запобіжник
-        taskList.getItems().setAll(currentUser.getTasks());
-        messageText.setVisible(taskList.getItems().isEmpty());
-    }
 }
 

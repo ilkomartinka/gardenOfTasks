@@ -12,6 +12,7 @@ import model.User;
 
 public class AddTaskController {
     private User currentUser;
+    private TaskManager taskManager= TaskManager.getInstance();
 
     @FXML
     private JFXTextArea descriptionTextArea;
@@ -43,6 +44,7 @@ public class AddTaskController {
     public void saveTask() {
         Task newTask = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
         currentUser.addTask(newTask);
+        taskManager.addTask(newTask);
         closeWindow();
     }
 

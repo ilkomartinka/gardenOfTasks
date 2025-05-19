@@ -69,7 +69,7 @@
                </image>
             </ImageView>
             <Line endX="293.20001220703125" endY="7.62939453125E-6" layoutX="554.0" layoutY="65.0" startX="-100.0" stroke="WHITE" />
-            <GridPane fx:id="grid" layoutX="283.0" layoutY="98.0" prefHeight="495.0" prefWidth="791.0">
+            <GridPane fx:id="grid" layoutX="283.0" layoutY="83.0" prefHeight="510.0" prefWidth="791.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
