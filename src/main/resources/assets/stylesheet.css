@@ -68,4 +68,11 @@
     -fx-background-color: rgb(16, 15, 15);
     -fx-background-radius: 30;
 }
-
+.timeLabel{
+    -fx-font-size: 60;
+    -fx-text-fill: white;
+}
+.startTimerButton{
+    -fx-background-color: black;
+    -fx-background-radius: 30;
+}

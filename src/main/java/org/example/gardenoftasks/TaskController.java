@@ -2,29 +2,35 @@ package org.example.gardenoftasks;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Task;
 import manager.TaskManager;
 import model.User;
 import util.ViewSwitcher;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TaskController {
     private final ViewSwitcher switcher = new ViewSwitcher();
     private final Stage stage = new Stage();
     private User currentUser;
+    private int doneTasksCounter;
 
     @FXML
     private Button gardenBtn;
@@ -42,6 +48,20 @@ public class TaskController {
 
     @FXML
     private Label usersCoins;
+
+    @FXML
+    private Label quoteLabel;
+
+    @FXML
+    private Label timeLabel;
+
+    @FXML
+    private GridPane gridInfo;
+    @FXML
+    private Label doneTasksLabel;
+
+    private ArrayList<String> quotes = new ArrayList<>();
+    private final Random random = new Random();
 
     private final TaskManager taskManager = TaskManager.getInstance();
 
@@ -65,6 +85,8 @@ public class TaskController {
     @FXML
     public void initialize() {
         setupTaskListView();
+        loadQuotesFromFile();
+        startQuoteChanging();
     }
 
     public void setCurrentUser(User user) {
@@ -123,12 +145,14 @@ public class TaskController {
         checkBox.setAlignment(Pos.CENTER_LEFT);
         checkBox.setOnAction(event -> {
             if (checkBox.isSelected()) {
-                titleLabel.setStyle("-fx-strikethrough: true");
                 currentUser.addCoins(task.getTaskType().getReward());
                 usersCoins.setText(String.valueOf(currentUser.getCoins()));
                 task.setDone(true);
+                doneTasksCounter++;
+            }else{
+                doneTasksCounter--;
             }
-
+            doneTasksLabel.setText(String.valueOf(doneTasksCounter));
         });
         return checkBox;
     }
@@ -141,5 +165,63 @@ public class TaskController {
         return label;
     }
 
-}
+    private void loadQuotesFromFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("quotes.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                    quotes.add(line.trim());
+                }
+            }
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void startQuoteChanging() {
+        new Thread(() -> {
+            try {
+                for (int i = 0; i < quotes.size(); i++) {
+                    int randomIndex = new Random().nextInt(quotes.size());
+                    String quote = quotes.get(randomIndex);
+
+                    Platform.runLater(() -> quoteLabel.setText(quote));
+                    quoteLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
+                    quoteLabel.setAlignment(Pos.CENTER);
+                    quoteLabel.setWrapText(true);
+                    Thread.sleep(300000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+    @FXML
+    void startTimer() {
+        startCountdown(timeLabel);
+    }
+
+    private int totalSeconds = 25 * 60; // 25 minutes in seconds
+    private Timeline countdownTimeline;
+
+    private void startCountdown(Label timerLabel) {
+        updateLabel(timerLabel);
+
+        countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            totalSeconds--;
+            updateLabel(timerLabel);
+            if (totalSeconds <= 0) {
+                countdownTimeline.stop();
+            }
+        }));
+        countdownTimeline.setCycleCount(Timeline.INDEFINITE);
+        countdownTimeline.play();
+    }
+
+    private void updateLabel(Label label) {
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        label.setAlignment(Pos.CENTER);
+        label.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+}
