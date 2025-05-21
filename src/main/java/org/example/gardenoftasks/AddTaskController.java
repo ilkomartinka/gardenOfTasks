@@ -25,7 +25,7 @@ public class AddTaskController {
     private JFXComboBox<TaskType> taskTypeComboBox;
 
     @FXML
-    private Text massageText;
+    private Text messageText;
 
 
     @FXML
@@ -36,16 +36,25 @@ public class AddTaskController {
 
     @FXML
     void closeWindow() {
-        Stage currentStage = (Stage) massageText.getScene().getWindow();
+        Stage currentStage = (Stage) messageText.getScene().getWindow();
         currentStage.close();
     }
 
     @FXML
     public void saveTask() {
         Task newTask = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
-        currentUser.addTask(newTask);
-        taskManager.addTask(newTask);
-        closeWindow();
+        if(taskTypeComboBox.getValue() != null){
+            if(!taskTextField.getText().isEmpty()){
+                currentUser.addTask(newTask);
+                taskManager.addTask(newTask);
+                closeWindow();
+            }else{
+                messageText.setText("Please enter a task name");
+            }
+
+        }else{
+            messageText.setText("Please select a task type");
+        }
     }
 
     public void setCurrentUser(User user) {
