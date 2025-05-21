@@ -39,6 +39,10 @@ public class Task implements Serializable {
         return done;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
