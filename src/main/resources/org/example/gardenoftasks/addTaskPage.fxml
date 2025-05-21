@@ -33,7 +33,7 @@
          </font>
       </JFXButton>
       <JFXTextArea fx:id="descriptionTextArea" focusColor="WHITE" labelFloat="true" layoutX="57.0" layoutY="83.0" prefHeight="50.0" prefWidth="366.0" promptText="Description" unFocusColor="WHITE" />
-      <Text fx:id="massageText" fill="WHITE" layoutX="57.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="160.0">
+      <Text fx:id="messageText" fill="#40b145" layoutX="57.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

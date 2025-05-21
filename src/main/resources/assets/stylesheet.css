@@ -64,15 +64,24 @@
     -fx-background-color: transparent;
 }
 
-.plant-item{
+.plant-item {
     -fx-background-color: rgb(16, 15, 15);
     -fx-background-radius: 30;
 }
-.timeLabel{
+
+.timeLabel {
     -fx-font-size: 60;
     -fx-text-fill: white;
 }
-.startTimerButton{
-    -fx-background-color: black;
+
+.timerButton {
+    -fx-background-color: rgba(30, 91, 58, 0.92);
+    -fx-text-fill: #000000 !important;
     -fx-background-radius: 30;
+}
+
+.gridText{
+    -fx-text-fill: #000000;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
 }

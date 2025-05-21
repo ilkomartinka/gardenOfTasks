@@ -67,7 +67,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Label>
-                        <Label fx:id="plantPriceLabel" prefHeight="31.0" prefWidth="47.0" text="3" textFill="WHITE">
+                        <Label fx:id="plantPriceLabel" prefHeight="31.0" prefWidth="58.0" text="3" textFill="WHITE">
                            <font>
                               <Font name="Cambria Bold" size="25.0" />
                            </font>

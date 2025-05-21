@@ -12,11 +12,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="1104.0" styleClass="background-center" stylesheets="@../../../assets/stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenoftasks.GardenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="795.0" prefWidth="1144.0" styleClass="background-center" stylesheets="@../../../assets/stylesheet.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenoftasks.GardenController">
    <children>
-      <AnchorPane layoutX="-131.0" prefHeight="735.0" prefWidth="1242.0" styleClass="background-right">
+      <AnchorPane layoutX="-134.0" prefHeight="788.0" prefWidth="1279.0" styleClass="background-right">
          <children>
-            <AnchorPane cache="true" depthTest="DISABLE" layoutX="474.0" layoutY="637.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="373.0" styleClass="style">
+            <AnchorPane cache="true" depthTest="DISABLE" layoutX="513.0" layoutY="645.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="78.0" prefWidth="373.0" styleClass="style">
                <children>
                   <JFXToolbar layoutX="21.0" layoutY="16.0" prefHeight="46.0" prefWidth="330.0">
                      <left>
@@ -53,23 +53,23 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="116.0" layoutY="198.0">
+            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="116.0" layoutY="188.0">
                <image>
                   <Image url="@../../../assets/shelf.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="109.0" layoutY="375.0">
+            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="109.0" layoutY="368.0">
                <image>
                   <Image url="@../../../assets/shelf.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="118.0" layoutY="543.0">
+            <ImageView fitHeight="104.0" fitWidth="1123.0" layoutX="118.0" layoutY="530.0">
                <image>
                   <Image url="@../../../assets/shelf.png" />
                </image>
             </ImageView>
-            <Line endX="293.20001220703125" endY="7.62939453125E-6" layoutX="554.0" layoutY="65.0" startX="-100.0" stroke="WHITE" />
-            <GridPane fx:id="grid" layoutX="283.0" layoutY="83.0" prefHeight="510.0" prefWidth="791.0">
+            <Line endX="293.20001220703125" endY="7.62939453125E-6" layoutX="575.0" layoutY="68.0" startX="-100.0" stroke="WHITE" />
+            <GridPane fx:id="grid" layoutX="246.0" layoutY="83.0" prefHeight="510.0" prefWidth="861.0">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -78,16 +78,36 @@
             </GridPane>
             <ImageView fitHeight="157.0" fitWidth="330.0" layoutX="144.0" layoutY="41.0" style="-fx-rotate: -30;">
                <image>
-                  <Image url="@../../../../../../../../Downloads/lights.png" />
+                  <Image url="@../../../assets/lights.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="157.0" fitWidth="330.0" layoutX="895.0" layoutY="49.0" style="-fx-rotate: 30;">
+            <ImageView fitHeight="157.0" fitWidth="384.0" layoutX="895.0" layoutY="49.0" style="-fx-rotate: 30;">
                <image>
-                  <Image url="@../../../../../../../../Downloads/lights.png" />
+                  <Image url="@../../../assets/lights.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="162.0" fitWidth="330.0" layoutX="928.0" layoutY="645.0">
+               <image>
+                  <Image url="@../../../assets/table.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="992.0" layoutY="523.0">
+               <image>
+                  <Image url="@../../../assets/decoration1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="162.0" fitWidth="330.0" layoutX="142.0" layoutY="644.0">
+               <image>
+                  <Image url="@../../../assets/table.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="208.0" layoutY="536.0">
+               <image>
+                  <Image url="@../../../assets/decoration2.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <Text fill="WHITE" layoutX="421.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GARDEN">
+      <Text fill="WHITE" layoutX="446.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GARDEN">
          <font>
             <Font name="Bauhaus 93" size="50.0" />
          </font>
