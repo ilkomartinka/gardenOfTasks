@@ -1,4 +1,4 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,7 +23,6 @@ public class PlantController {
     private AnchorPane plantPane;
 
     private Plant plant;
-
 
     public void setPlant(Plant plant, ShopController shopController) {
         this.plant = plant;

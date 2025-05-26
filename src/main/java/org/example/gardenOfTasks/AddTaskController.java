@@ -1,4 +1,4 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
 import com.jfoenix.controls.*;
 import javafx.fxml.FXML;
@@ -12,7 +12,11 @@ import model.User;
 
 public class AddTaskController {
     private User currentUser;
-    private TaskManager taskManager= TaskManager.getInstance();
+    private final TaskManager taskManager;
+
+    public AddTaskController() {
+        taskManager= TaskManager.getInstance();
+    }
 
     @FXML
     private JFXTextArea descriptionTextArea;

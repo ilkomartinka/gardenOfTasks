@@ -1,9 +1,8 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -26,6 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class TaskController {
     private final ViewSwitcher switcher = new ViewSwitcher();
     private final Stage stage = new Stage();
@@ -38,8 +38,6 @@ public class TaskController {
     @FXML
     private Button shopBtn;
 
-    @FXML
-    private Button toDoBtn;
     @FXML
     private JFXListView<Task> taskList;
 
@@ -62,28 +60,32 @@ public class TaskController {
     private Label flowersPlantedLabel;
 
     @FXML
-    private Label activeTimeLabel;
-
-    private ArrayList<String> quotes = new ArrayList<>();
+    private ProgressBar progressBar;
 
 
-    private final TaskManager taskManager = TaskManager.getInstance();
+    private final ArrayList<String> quotes = new ArrayList<>();
 
+
+    private final TaskManager taskManager;
+
+    public TaskController() {
+        taskManager = TaskManager.getInstance();
+    }
 
     @FXML
     void addTaskBtn() throws IOException {
-        switcher.switchToScene(stage, "/org/example/gardenoftasks/addTaskPage.fxml", currentUser);
+        switcher.switchToScene(stage, "/org/example/gardenOfTasks/addTaskPage.fxml", currentUser);
         taskManager.displayTasks(taskList);
     }
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml", currentUser);
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
 
     @FXML
     void goToShop() throws IOException {
-        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml", currentUser);
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenOfTasks/shop.fxml", currentUser);
     }
 
     @FXML
@@ -91,6 +93,7 @@ public class TaskController {
         setupTaskListView();
         loadQuotesFromFile();
         startQuoteChanging();
+        updateTimeLabel(timeLabel);
         if (taskList == null) {
             messageText.setVisible(true);
         }
@@ -121,14 +124,14 @@ public class TaskController {
     public Node createTask(Task task) {
         Label taskTypeLabel = createTaskTypeLabel(task);
         Label titleLabel = createTaskLabel(task);
-        JFXCheckBox checkBox = createCheckBox(task, titleLabel);
+        JFXCheckBox checkBox = createCheckBox(task);
         Label rewardLabel = createRewardLabel(task);
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
         Region spaceBetween = new Region();
         HBox.setHgrow(spaceBetween, Priority.ALWAYS);
         HBox taskLine = new HBox(10, checkBox, titleLabel, spacer, taskTypeLabel, spaceBetween, rewardLabel);
-        taskLine.setAlignment(Pos.CENTER_LEFT); // set position in the line
+        taskLine.setAlignment(Pos.CENTER_LEFT);
         Tooltip tooltip = new Tooltip(task.getDescription());
         tooltip.setStyle("-fx-font-size: 14px;");
         Tooltip.install(taskLine, tooltip);
@@ -151,18 +154,16 @@ public class TaskController {
         return label;
     }
 
-    private JFXCheckBox createCheckBox(Task task, Label titleLabel) {
+    private JFXCheckBox createCheckBox(Task task) {
         JFXCheckBox checkBox = new JFXCheckBox();
         checkBox.setAlignment(Pos.CENTER_LEFT);
         checkBox.setOnAction(event -> {
             if (checkBox.isSelected()) {
-                currentUser.addCoins(task.getTaskType().getReward());
-                task.setDone(true);
+                taskManager.completeTask(task, currentUser);
                 doneTasksCounter++;
             } else {
-                task.setDone(false);
+                taskManager.uncompleteTask(task, currentUser);
                 doneTasksCounter--;
-                currentUser.removeCoins(task.getTaskType().getReward());
             }
             usersCoins.setText(String.valueOf(currentUser.getCoins()));
             doneTasksLabel.setText(String.valueOf(doneTasksCounter));
@@ -182,7 +183,7 @@ public class TaskController {
         try (BufferedReader reader = new BufferedReader(new FileReader("quotes.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (!line.trim().isEmpty()) {
+                if (!line.isEmpty()) {
                     quotes.add(line.trim());
                 }
             }
@@ -202,7 +203,7 @@ public class TaskController {
                     quoteLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold");
                     quoteLabel.setAlignment(Pos.CENTER);
                     quoteLabel.setWrapText(true);
-                    Thread.sleep(300000);
+                    Thread.sleep(180000);
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -221,27 +222,13 @@ public class TaskController {
     @FXML
     void stopTimer() {
         countdownTimeline.stop();
-
-        /*String[] parts = timeLabel.getText().split(":");
-        int minutes = Integer.parseInt(parts[0]);
-        int seconds = Integer.parseInt(parts[1]);
-
-        int totalSeconds = minutes * 60 + seconds;
-
-        int activeTime = totalSeconds - activeSeconds;
-        int activeMinutes = activeTime / 60;
-        int activeRemainingSeconds = activeTime % 60;
-
-        activeTimeLabel.setText(String.format("%02d:%02d", activeMinutes, activeRemainingSeconds));*/
-
     }
 
-
     private void startCountdown() {
-        updateLabel(timeLabel);
+        updateTimeLabel(timeLabel);
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             totalSeconds--;
-            updateLabel(timeLabel);
+            updateTimeLabel(timeLabel);
             if (totalSeconds <= 0) {
                 countdownTimeline.stop();
             }
@@ -250,9 +237,9 @@ public class TaskController {
         countdownTimeline.play();
     }
 
-    private void updateLabel(Label label) {
+    private void updateTimeLabel(Label timeLabel) {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
-        label.setText(String.format("%02d:%02d", minutes, seconds));
+        timeLabel.setText(String.format("%02d:%02d", minutes, seconds));
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="556.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenoftasks.LoginController">
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenOfTasks.LoginController">
    <AnchorPane prefHeight="558.0" prefWidth="856.0" styleClass="background-center"
                stylesheets="@../../../assets/stylesheet.css">
       <AnchorPane fx:id="sliderPane" layoutX="438.0" prefHeight="558.0" prefWidth="420.0"

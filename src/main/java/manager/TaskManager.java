@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import model.Task;
+import model.User;
 
 public class TaskManager {
     private final ObservableList<Task> tasks;
@@ -17,10 +18,6 @@ public class TaskManager {
         tasks.add(task);
     }
 
-    public void removeTask(Task task) {
-        tasks.remove(task);
-    }
-
     public static TaskManager getInstance() {
         if (instance == null) {
             instance = new TaskManager();
@@ -31,5 +28,24 @@ public class TaskManager {
     public void displayTasks(ListView<Task> taskList) {
         taskList.setItems(tasks);
     }
+
+    public void clearTasks() {
+        tasks.clear();
+    }
+
+    public void completeTask(Task task, User user) {
+        if (!task.isDone()) {
+            task.setDone(true);
+            user.addCoins(task.getTaskType().getReward());
+        }
+    }
+
+    public void uncompleteTask(Task task, User user) {
+        if (task.isDone()) {
+            task.setDone(false);
+            user.removeCoins(task.getTaskType().getReward());
+        }
+    }
+
 
 }

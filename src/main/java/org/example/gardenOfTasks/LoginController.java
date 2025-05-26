@@ -1,4 +1,4 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -96,13 +96,12 @@ public class LoginController {
         showSignUpPage();
     }
 
-
     @FXML
     void login() throws IOException {
         User user = um.login(loginUsername.getText(), loginPassword.getText());
         if (user != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
-            switcher.switchToScene(stage, "/org/example/gardenoftasks/mainPage.fxml",user);
+            switcher.switchToScene(stage, "/org/example/gardenOfTasks/mainPage.fxml",user);
             text.setVisible(true);
             text.setText("Login Successful");
         } else {
@@ -110,7 +109,6 @@ public class LoginController {
             text.setText("Invalid Username or Password");
         }
     }
-
 
     @FXML
     void register() throws IOException {

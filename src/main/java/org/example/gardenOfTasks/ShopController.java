@@ -1,18 +1,14 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
-import com.jfoenix.controls.JFXButton;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,15 +21,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class ShopController {
 
-    private ViewSwitcher switcher;
+    private final ViewSwitcher switcher;
 
-    @FXML
-    private JFXButton buyBtn;
-
-    @FXML
-    private HBox chosenPlantCard;
 
     @FXML
     private Button gardenBtn;
@@ -54,15 +46,8 @@ public class ShopController {
     private GridPane grid;
 
     @FXML
-    private Button shopBtn;
-
-    @FXML
-    private ScrollPane scroll;
-
-    @FXML
     private Label usersCoins;
 
-    private Plant plant;
 
     private ArrayList<Plant> plants;
 
@@ -71,7 +56,7 @@ public class ShopController {
     private Plant chosenPlant;
 
     @FXML
-    private Text gratulationText;
+    private Text congratulationText;
 
     @FXML
     private Text errorMessage;
@@ -82,12 +67,12 @@ public class ShopController {
 
     @FXML
     void goToGarden() throws IOException {
-        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenoftasks/garden.fxml", currentUser);
+        switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
 
     @FXML
     void goToHome() throws IOException {
-        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenoftasks/mainPage.fxml", currentUser);
+        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
 
     public ArrayList<Plant> getPlants() {
@@ -130,14 +115,14 @@ public class ShopController {
         plants = getPlants();
         int column = 0;
         int row = 1;
-        gratulationText.setVisible(false);
+        congratulationText.setVisible(false);
         errorMessage.setVisible(false);
-        for (int i = 0; i < plants.size(); i++) {
+        for (Plant value : plants) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/gardenoftasks/plant.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/gardenOfTasks/plant.fxml"));
                 AnchorPane pane = fxmlLoader.load();
                 PlantController plantController = fxmlLoader.getController();
-                plantController.setPlant(plants.get(i), this);
+                plantController.setPlant(value, this);
                 grid.add(pane, column++, row);
                 GridPane.setMargin(pane, new Insets(10));
                 if (column == 3) {
@@ -161,9 +146,10 @@ public class ShopController {
         if(currentUser.getCoins() >= chosenPlant.getPrice()) {
             currentUser.removeCoins(getChosenPlant().getPrice());
             usersCoins.setText(String.valueOf(currentUser.getCoins()));
-            currentUser.addPLant(chosenPlant);
-            gratulationText.setVisible(true);
+            currentUser.addPlant(chosenPlant);
+            congratulationText.setVisible(true);
             currentUser.updateCoins(usersCoins);
+
         }else{
             errorMessage.setVisible(true);
         }

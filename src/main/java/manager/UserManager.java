@@ -5,7 +5,7 @@ import model.User;
 import java.io.*;
 import java.util.HashMap;
 
-public class UserManager {
+public class UserManager implements Serializable {
     private HashMap<String, User> users; //username, User
     private final File file = new File("users.dat");
 
@@ -13,22 +13,21 @@ public class UserManager {
         users = loadUsers();
     }
 
-    public User login(String username, String password) {
+    public User login(String username, String password) throws IOException {
         User user = users.get(username);
         if (users.containsKey(username) && user.getPassword().equals(password)) {
+            saveUsers();
             return user;
         }
         return null;
     }
 
-    public boolean register(String username, String password) throws IOException {
+    public void register(String username, String password) throws IOException {
         if (!users.containsKey(username)) {
             User user = new User(username, password);
             users.put(username, user);
             saveUsers();
-            return true;
         }
-        return false;
     }
 
     private void saveUsers() throws IOException {

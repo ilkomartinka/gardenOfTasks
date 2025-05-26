@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="plantPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="194.0"
+            prefWidth="202.0" styleClass="plant-item" stylesheets="@../../../assets/stylesheet.css"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.gardenOfTasks.PlantController">
+   <VBox layoutY="4.0" prefHeight="180.0" prefWidth="202.0" style="-fx-background-radius: 30;">
+      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="0.0">
+         <VBox.margin>
+            <Insets top="10.0"/>
+         </VBox.margin>
+         <Label fx:id="nameLabel" prefHeight="31.0" prefWidth="125.0" text="Focusa" textFill="WHITE">
+            <font>
+               <Font name="Cambria Bold" size="23.0"/>
+            </font>
+            <HBox.margin>
+               <Insets left="25.0"/>
+            </HBox.margin>
+         </Label>
+         <Label fx:id="priceLabel" prefHeight="36.0" prefWidth="46.0" text="3" textAlignment="RIGHT"
+                textFill="WHITE">
+            <font>
+               <Font name="Cambria Bold" size="20.0"/>
+            </font>
+            <HBox.margin>
+               <Insets/>
+            </HBox.margin>
+         </Label>
+         <Label prefHeight="28.0" prefWidth="42.0" text="\$" textFill="WHITE">
+            <font>
+               <Font name="Cambria Bold" size="20.0"/>
+            </font>
+            <HBox.margin>
+               <Insets right="20.0"/>
+            </HBox.margin>
+         </Label>
+      </HBox>
+      <ImageView fx:id="imageView" fitHeight="140.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
+         <VBox.margin>
+            <Insets bottom="5.0" left="30.0"/>
+         </VBox.margin>
+         <Image url="@../../../assets/plant1.png"/>
+      </ImageView>
+   </VBox>
+</AnchorPane>

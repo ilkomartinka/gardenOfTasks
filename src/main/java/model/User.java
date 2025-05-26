@@ -1,8 +1,7 @@
 package model;
-
 import javafx.scene.control.Label;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -10,8 +9,8 @@ public class User implements Serializable {
     private final String username;
     private final String password;
     private int coins;
-    private final ArrayList<Task> tasks;  //change
-    private final HashSet<Plant> plants; //change
+    private final ArrayList<Task> tasks;
+    private final HashSet<Plant> plants;
 
     public User(String username, String password) {
         this.username = username;
@@ -24,7 +23,8 @@ public class User implements Serializable {
     public void addTask(Task task) {
         tasks.add(task);
     }
-    public void addPLant(Plant plant) {
+
+    public void addPlant(Plant plant) {
         plants.add(plant);
     }
 
@@ -36,10 +36,6 @@ public class User implements Serializable {
         this.coins -= coins;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -47,12 +43,9 @@ public class User implements Serializable {
     public int getCoins() {
         return coins;
     }
-    public void updateCoins(Label usersCoins){
-        usersCoins.setText(String.valueOf(getCoins()));
-    }
 
-    public ArrayList<Task> getTasks() {
-        return tasks;
+    public void updateCoins(Label usersCoins) {
+        usersCoins.setText(String.valueOf(getCoins()));
     }
 
     public HashSet<Plant> getPlants() {

@@ -1,4 +1,4 @@
-package org.example.gardenoftasks;
+package org.example.gardenOfTasks;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -12,11 +12,10 @@ import model.Plant;
 import model.User;
 import util.ViewSwitcher;
 
-import javax.swing.text.Element;
-import java.awt.*;
 import java.io.IOException;
 import java.util.HashSet;
 
+@SuppressWarnings("CallToPrintStackTrace")
 public class GardenController {
 
 
@@ -28,7 +27,6 @@ public class GardenController {
 
     private final ViewSwitcher switcher;
     private User currentUser;
-    private HashSet<Plant> userPlants;
 
     @FXML
     private GridPane grid;
@@ -45,12 +43,12 @@ public class GardenController {
 
     @FXML
     void goToHome() throws IOException {
-        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenoftasks/mainPage.fxml", currentUser);
+        switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
 
     @FXML
     void goToShop() throws IOException {
-        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenoftasks/shop.fxml", currentUser);
+        switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenOfTasks/shop.fxml", currentUser);
     }
 
     public void setCurrentUser(User user) {
@@ -59,7 +57,7 @@ public class GardenController {
     }
 
     public void showUserPlants() {
-        userPlants = currentUser.getPlants();
+        HashSet<Plant> userPlants = currentUser.getPlants();
         int row = 0;
         int column = 0;
         for (Plant plant : userPlants) {
@@ -72,7 +70,7 @@ public class GardenController {
                 imageView.setFitWidth(200);
                 imageView.setPreserveRatio(true);
 
-                if (column == 5) {
+                if (column == 4) {
                     column = 0;
                     row++;
                 }

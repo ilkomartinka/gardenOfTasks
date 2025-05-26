@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Task implements Serializable {
     private final String taskName;
-    private TaskType taskType;
+    private final TaskType taskType;
     private final String description;
     private boolean done;
 
@@ -27,16 +27,9 @@ public class Task implements Serializable {
         return taskType;
     }
 
-    public void setTaskType(TaskType taskType) {
-        this.taskType = taskType;
-    }
 
     public void setDone(boolean done) {
         this.done = done;
-    }
-
-    public boolean isDone() {
-        return done;
     }
 
     public String getDescription() {
@@ -59,5 +52,9 @@ public class Task implements Serializable {
     public String toString() {
         CheckBox checkBox = new CheckBox();
         return  checkBox + taskName + " " + taskType;
+    }
+
+    public boolean isDone() {
+        return done;
     }
 }

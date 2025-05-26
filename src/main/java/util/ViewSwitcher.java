@@ -5,10 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.User;
-import org.example.gardenoftasks.AddTaskController;
-import org.example.gardenoftasks.GardenController;
-import org.example.gardenoftasks.ShopController;
-import org.example.gardenoftasks.TaskController;
+import org.example.gardenOfTasks.AddTaskController;
+import org.example.gardenOfTasks.GardenController;
+import org.example.gardenOfTasks.ShopController;
+import org.example.gardenOfTasks.TaskController;
 
 import java.io.IOException;
 
