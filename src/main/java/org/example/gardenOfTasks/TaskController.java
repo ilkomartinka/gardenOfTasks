@@ -62,6 +62,9 @@ public class TaskController {
     @FXML
     private ProgressBar progressBar;
 
+    @FXML
+    private Label progressLabel;
+
 
     private final ArrayList<String> quotes = new ArrayList<>();
 
@@ -167,6 +170,7 @@ public class TaskController {
             }
             usersCoins.setText(String.valueOf(currentUser.getCoins()));
             doneTasksLabel.setText(String.valueOf(doneTasksCounter));
+            updateProgressBar();
         });
         return checkBox;
     }
@@ -241,5 +245,13 @@ public class TaskController {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         timeLabel.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+
+    private void updateProgressBar(){
+        int totalTasks = currentUser.getTasks().size();
+        double progress = (double) doneTasksCounter / totalTasks;
+        progressBar.setProgress(progress);
+        int percent = (int) (progress * 100);
+        progressLabel.setText(percent + "%");
     }
 }

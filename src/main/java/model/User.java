@@ -52,6 +52,10 @@ public class User implements Serializable {
         return plants;
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
     @Override
     public String toString() {
         return "User{" +

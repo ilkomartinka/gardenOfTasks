@@ -7,6 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -89,7 +90,7 @@
             </right>
          </JFXToolbar>
       </AnchorPane>
-      <AnchorPane layoutX="584.0" layoutY="409.0" prefHeight="106.0" prefWidth="350.0" stylesheets="@../../../assets/stylesheet.css">
+      <AnchorPane layoutX="584.0" layoutY="409.0" prefHeight="106.0" prefWidth="370.0" stylesheets="@../../../assets/stylesheet.css">
          <styleClass>
             <String fx:value="main-background" />
             <String fx:value="style" />
@@ -117,15 +118,15 @@
             <String fx:value="timerButton" />
          </styleClass>
       </JFXButton>
-      <AnchorPane layoutX="586.0" layoutY="217.0" prefHeight="158.0" prefWidth="350.0" stylesheets="@../../../assets/stylesheet.css">
+      <AnchorPane layoutX="586.0" layoutY="217.0" prefHeight="158.0" prefWidth="369.0" stylesheets="@../../../assets/stylesheet.css">
          <styleClass>
             <String fx:value="main-background" />
             <String fx:value="style" />
          </styleClass>
-         <GridPane layoutX="11.0" layoutY="13.0" prefHeight="124.0" prefWidth="323.0">
+         <GridPane layoutX="11.0" layoutY="13.0" prefHeight="124.0" prefWidth="350.0">
             <columnConstraints>
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.79998779296875" minWidth="10.0" prefWidth="175.0" />
+               <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.5999755859375" minWidth="10.0" prefWidth="175.0" />
             </columnConstraints>
             <rowConstraints>
                <RowConstraints />
@@ -139,12 +140,12 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Active time: " GridPane.rowIndex="3">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flowers planted:" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Flowers planted:" GridPane.rowIndex="4">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progress:" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -162,15 +163,15 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Label prefHeight="24.0" prefWidth="160.0" text="\$" textAlignment="CENTER" textFill="#7fff90" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label prefHeight="24.0" prefWidth="175.0" text="\$" textAlignment="CENTER" textFill="#7fff90" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Cambria Bold" size="20.0" />
                </font>
                <padding>
-                  <Insets left="140.0" />
+                  <Insets left="150.0" />
                </padding>
             </Label>
-            <Label fx:id="usersCoins" prefHeight="24.0" prefWidth="137.0" text="0" textAlignment="CENTER" textFill="#7fff90" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="usersCoins" prefHeight="24.0" prefWidth="150.0" text="0" textAlignment="CENTER" textFill="#7fff90" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Cambria Bold" size="20.0" />
                </font>
@@ -178,18 +179,22 @@
                   <Insets left="120.0" />
                </padding>
             </Label>
-            <Label prefHeight="18.0" prefWidth="154.0" styleClass="gridText" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <padding>
-                  <Insets left="95.0" />
-               </padding>
-            </Label>
-            <Label fx:id="flowersPlantedLabel" prefHeight="18.0" prefWidth="159.0" styleClass="gridText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Label fx:id="flowersPlantedLabel" prefHeight="18.0" prefWidth="159.0" styleClass="gridText" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <padding>
                   <Insets left="123.0" />
                </padding>
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+            </Label>
+            <ProgressBar fx:id="progressBar" prefHeight="23.0" prefWidth="172.0" progress="0.0" stylesheets="@../../../assets/stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="progressLabel" prefHeight="27.0" prefWidth="174.0" styleClass="progress-bar-label" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="130.0" />
+               </padding>
             </Label>
          </GridPane>
       </AnchorPane>
@@ -198,7 +203,7 @@
             <Font name="Arial Rounded MT Bold" size="23.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="95.0" fitWidth="100.0" layoutX="867.0" layoutY="451.0">
+      <ImageView fitHeight="95.0" fitWidth="100.0" layoutX="878.0" layoutY="451.0">
          <Image url="@../../../assets/decoration3.png" />
       </ImageView>
       <Text fill="WHITE" layoutX="639.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FOCUS TIMER" textAlignment="CENTER" wrappingWidth="266.13671875">

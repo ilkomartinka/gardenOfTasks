@@ -85,3 +85,17 @@
     -fx-font-size: 18;
     -fx-font-weight: bold;
 }
+
+.progress-bar .bar {
+    -fx-background-color: linear-gradient(to right, #90ee90, #32cd32);
+    -fx-background-radius: 10;
+}
+
+.progress-bar .track {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 10;
+}
+
+.progress-bar-label{
+    -fx-text-fill: #000000 !important;
+}
