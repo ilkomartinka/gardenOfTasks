@@ -1,5 +1,6 @@
 package model;
 import javafx.scene.control.Label;
+import manager.UserManager;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class User implements Serializable {
     private final ArrayList<Task> tasks;
     private final HashSet<Plant> plants;
 
-    public User(String username, String password) {
+    public User(String username, String password) throws IOException, ClassNotFoundException {
         this.username = username;
         this.password = password;
         this.coins = 0;
@@ -20,20 +21,24 @@ public class User implements Serializable {
         this.plants = new HashSet<>();
     }
 
-    public void addTask(Task task) {
+    public void addTask(Task task) throws IOException, ClassNotFoundException {
         tasks.add(task);
+        UserManager.getInstance().save();
     }
 
-    public void addPlant(Plant plant) {
+    public void addPlant(Plant plant) throws IOException, ClassNotFoundException {
         plants.add(plant);
+        UserManager.getInstance().save();
     }
 
-    public void addCoins(int coins) {
+    public void addCoins(int coins) throws IOException, ClassNotFoundException {
         this.coins += coins;
+        UserManager.getInstance().save();
     }
 
-    public void removeCoins(int coins) {
+    public void removeCoins(int coins) throws IOException, ClassNotFoundException {
         this.coins -= coins;
+        UserManager.getInstance().save();
     }
 
     public String getPassword() {

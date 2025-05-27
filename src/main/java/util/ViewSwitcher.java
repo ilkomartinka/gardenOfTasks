@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ViewSwitcher {
     // Switch scene using given FXML file and Stage
-    public  void switchToScene(Stage stage, String fxml, User user) throws IOException {
+    public  void switchToScene(Stage stage, String fxml, User user) throws IOException, ClassNotFoundException {
         FXMLLoader fxmlLoader = new FXMLLoader(ViewSwitcher.class.getResource(fxml));
         Parent root = fxmlLoader.load();
         Object controller = fxmlLoader.getController();

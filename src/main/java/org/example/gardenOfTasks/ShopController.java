@@ -66,12 +66,12 @@ public class ShopController {
     }
 
     @FXML
-    void goToGarden() throws IOException {
+    void goToGarden() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
 
     @FXML
-    void goToHome() throws IOException {
+    void goToHome() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
 
@@ -142,15 +142,16 @@ public class ShopController {
     }
 
     @FXML
-    void buyPlant() {
+    void buyPlant() throws IOException, ClassNotFoundException {
         if(currentUser.getCoins() >= chosenPlant.getPrice()) {
             currentUser.removeCoins(getChosenPlant().getPrice());
             usersCoins.setText(String.valueOf(currentUser.getCoins()));
             currentUser.addPlant(chosenPlant);
+            errorMessage.setVisible(false);
             congratulationText.setVisible(true);
             currentUser.updateCoins(usersCoins);
-
         }else{
+            congratulationText.setVisible(false);
             errorMessage.setVisible(true);
         }
 

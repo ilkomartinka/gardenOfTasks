@@ -1,8 +1,7 @@
 package model;
 
-import java.io.Serializable;
 
-public enum TaskType implements Serializable {
+public enum TaskType {
     // School-related tasks
     HOMEWORK(5),
     STUDY(15),

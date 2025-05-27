@@ -63,7 +63,7 @@ public class LoginController {
     private final ViewSwitcher switcher = new ViewSwitcher();
 
     public LoginController() throws IOException, ClassNotFoundException {
-        this.um = new UserManager();
+        this.um = UserManager.getInstance();
         this.slide = new TranslateTransition();
     }
 
@@ -97,13 +97,11 @@ public class LoginController {
     }
 
     @FXML
-    void login() throws IOException {
+    void login() throws IOException, ClassNotFoundException {
         User user = um.login(loginUsername.getText(), loginPassword.getText());
         if (user != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
             switcher.switchToScene(stage, "/org/example/gardenOfTasks/mainPage.fxml",user);
-            text.setVisible(true);
-            text.setText("Login Successful");
         } else {
             text.setVisible(true);
             text.setText("Invalid Username or Password");
@@ -111,7 +109,7 @@ public class LoginController {
     }
 
     @FXML
-    void register() throws IOException {
+    void register() throws IOException, ClassNotFoundException {
         text.setVisible(true);
         if (signUpPassword.getText().equals(signUpPassword2.getText())) {
             if (!um.getUsers().containsKey(signUpUsername.getText())) {
