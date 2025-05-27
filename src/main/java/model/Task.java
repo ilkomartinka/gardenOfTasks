@@ -10,6 +10,7 @@ public class Task implements Serializable {
     private final TaskType taskType;
     private final String description;
     private boolean done;
+    private boolean rewardGiven;
 
 
     public Task(String taskName, TaskType taskType, String description) {
@@ -30,6 +31,14 @@ public class Task implements Serializable {
 
     public void setDone(boolean done) {
         this.done = done;
+    }
+
+    public void setRewardGiven(boolean rewardGiven) {
+        this.rewardGiven = rewardGiven;
+    }
+
+    public boolean isRewardGiven() {
+        return rewardGiven;
     }
 
     public String getDescription() {

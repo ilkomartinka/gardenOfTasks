@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import manager.UserManager;
 import model.Task;
 import manager.TaskManager;
 import model.User;
@@ -66,50 +67,65 @@ public class TaskController {
     private Label progressLabel;
 
 
-    private final ArrayList<String> quotes = new ArrayList<>();
+    private final ArrayList<String> quotes;
 
 
     private final TaskManager taskManager;
 
     public TaskController() {
         taskManager = TaskManager.getInstance();
+        quotes = new ArrayList<>();
     }
 
     @FXML
-    void addTaskBtn() throws IOException {
+    void addTaskBtn() throws IOException, ClassNotFoundException {
         switcher.switchToScene(stage, "/org/example/gardenOfTasks/addTaskPage.fxml", currentUser);
-        taskManager.displayTasks(taskList);
+        taskManager.displayTasks(currentUser,taskList);
     }
 
     @FXML
-    void goToGarden() throws IOException {
+    void goToGarden() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
 
     @FXML
-    void goToShop() throws IOException {
+    void goToShop() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenOfTasks/shop.fxml", currentUser);
     }
 
     @FXML
-    public void initialize() {
+    void clearTasks() throws IOException, ClassNotFoundException {
+        taskManager.clearTasks(currentUser);
+        taskList.getItems().clear();
+        progressBar.setProgress(0);
+        doneTasksLabel.setText("0");
+        UserManager.getInstance().save();
+    }
+
+    @FXML
+    public void initialize() throws IOException, ClassNotFoundException {
         setupTaskListView();
-        loadQuotesFromFile();
         startQuoteChanging();
-        updateTimeLabel(timeLabel);
+        updateTimeLabel();
         if (taskList == null) {
             messageText.setVisible(true);
         }
     }
 
-    public void setCurrentUser(User user) {
+    public void setCurrentUser(User user) throws IOException, ClassNotFoundException {
         this.currentUser = user;
         user.updateCoins(usersCoins);
-        taskManager.displayTasks(taskList);
+        taskManager.displayTasks(currentUser, taskList);
         flowersPlantedLabel.setText(String.valueOf(currentUser.getPlants().size()));
+        doneTasksLabel.setText(String.valueOf(taskManager.getCompletedTasksCount(currentUser)));
+        try {
+            updateProgressBar();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setupTaskListView() {
+    private void setupTaskListView() throws IOException, ClassNotFoundException {
         taskList.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Task task, boolean empty) {
@@ -117,14 +133,19 @@ public class TaskController {
                 if (empty || task == null) {
                     setGraphic(null);
                 } else {
-                    setGraphic(createTask(task));
+                    try {
+                        setGraphic(createTask(task));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     messageText.setVisible(false);
                 }
             }
         });
+        UserManager.getInstance().save();
     }
 
-    public Node createTask(Task task) {
+    public Node createTask(Task task) throws IOException {
         Label taskTypeLabel = createTaskTypeLabel(task);
         Label titleLabel = createTaskLabel(task);
         JFXCheckBox checkBox = createCheckBox(task);
@@ -160,17 +181,23 @@ public class TaskController {
     private JFXCheckBox createCheckBox(Task task) {
         JFXCheckBox checkBox = new JFXCheckBox();
         checkBox.setAlignment(Pos.CENTER_LEFT);
+        checkBox.setSelected(task.isDone());
         checkBox.setOnAction(event -> {
-            if (checkBox.isSelected()) {
-                taskManager.completeTask(task, currentUser);
-                doneTasksCounter++;
-            } else {
-                taskManager.uncompleteTask(task, currentUser);
-                doneTasksCounter--;
+            try {
+                if (checkBox.isSelected() && !task.isDone()) {
+                    taskManager.completeTask(task, currentUser);
+                    doneTasksCounter++;
+                } else if (!checkBox.isSelected() && task.isDone()) {
+                    taskManager.uncompleteTask(task, currentUser);
+                    doneTasksCounter--;
+                }
+                usersCoins.setText(String.valueOf(currentUser.getCoins()));
+                doneTasksLabel.setText(String.valueOf(taskManager.getCompletedTasksCount(currentUser)));
+                updateProgressBar();
+                UserManager.getInstance().save();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
             }
-            usersCoins.setText(String.valueOf(currentUser.getCoins()));
-            doneTasksLabel.setText(String.valueOf(doneTasksCounter));
-            updateProgressBar();
         });
         return checkBox;
     }
@@ -197,12 +224,12 @@ public class TaskController {
     }
 
     private void startQuoteChanging() {
+        loadQuotesFromFile();
         new Thread(() -> {
             try {
                 for (int i = 0; i < quotes.size(); i++) {
                     int randomIndex = new Random().nextInt(quotes.size());
                     String quote = quotes.get(randomIndex);
-
                     Platform.runLater(() -> quoteLabel.setText(quote));
                     quoteLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold");
                     quoteLabel.setAlignment(Pos.CENTER);
@@ -229,10 +256,10 @@ public class TaskController {
     }
 
     private void startCountdown() {
-        updateTimeLabel(timeLabel);
+        updateTimeLabel();
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             totalSeconds--;
-            updateTimeLabel(timeLabel);
+            updateTimeLabel();
             if (totalSeconds <= 0) {
                 countdownTimeline.stop();
             }
@@ -241,17 +268,21 @@ public class TaskController {
         countdownTimeline.play();
     }
 
-    private void updateTimeLabel(Label timeLabel) {
+    private void updateTimeLabel() {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         timeLabel.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
-    private void updateProgressBar(){
+    private void updateProgressBar() throws IOException, ClassNotFoundException {
         int totalTasks = currentUser.getTasks().size();
-        double progress = (double) doneTasksCounter / totalTasks;
-        progressBar.setProgress(progress);
-        int percent = (int) (progress * 100);
-        progressLabel.setText(percent + "%");
+        int doneTasks = taskManager.getCompletedTasksCount(currentUser);
+        if (totalTasks != 0) {
+            double progress = (double) doneTasks / totalTasks;
+            progressBar.setProgress(progress);
+            int percent = (int) (progress * 100);
+            progressLabel.setText(percent + "%");
+        }
+        UserManager.getInstance().save();
     }
 }
