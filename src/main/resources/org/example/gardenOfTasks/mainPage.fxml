@@ -68,12 +68,10 @@
          <JFXButton contentDisplay="CENTER" layoutX="21.0" layoutY="499.0" onAction="#clearTasks" prefHeight="78.0" prefWidth="82.0" style="-fx-background-radius: 20; -fx-background-color: #000000;" text=" ">
             <graphic>
                <ImageView fitHeight="47.0" fitWidth="49.0" pickOnBounds="true">
-                  <image>
-                     <Image url="@../../../assets/trash.png" />
-                  </image>
                   <viewport>
-                     <Rectangle2D />
+                     <Rectangle2D/>
                   </viewport>
+                  <Image url="@../../../assets/trash.png"/>
                </ImageView>
             </graphic>
          </JFXButton>

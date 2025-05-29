@@ -12,13 +12,20 @@ import model.User;
 
 import java.io.IOException;
 
+/**
+ * Controller for the Add Task window.
+ * Allows the user to enter task details and save them to the current user.
+ */
 
 public class AddTaskController {
     private User currentUser;
     private final TaskManager taskManager;
 
-    public AddTaskController() throws IOException, ClassNotFoundException {
-        taskManager= TaskManager.getInstance();
+    /**
+     * Constructor that initializes the TaskManager instance.
+     */
+    public AddTaskController() {
+        taskManager = TaskManager.getInstance();
     }
 
     @FXML
@@ -34,36 +41,56 @@ public class AddTaskController {
     @FXML
     private Text messageText;
 
-
+    /**
+     * Initializes the combo box with available task types.
+     */
     @FXML
     public void initialize() {
         taskTypeComboBox.getItems().addAll(TaskType.values());
     }
 
-
+    /**
+     * Closes the current window.
+     */
     @FXML
     void closeWindow() {
         Stage currentStage = (Stage) messageText.getScene().getWindow();
         currentStage.close();
     }
 
+    /**
+     * Validates the input and saves the new task to the user and system.
+     * Shows a message if required fields are missing.
+     */
     @FXML
     public void saveTask() throws IOException, ClassNotFoundException {
         Task newTask = new Task(taskTextField.getText(), taskTypeComboBox.getValue(), descriptionTextArea.getText());
-        if(taskTypeComboBox.getValue() != null){
-            if(!taskTextField.getText().isEmpty()){
+        if (taskTypeComboBox.getValue() != null) {
+            if (!taskTextField.getText().isEmpty()) {
                 currentUser.addTask(newTask);
                 taskManager.addTask(newTask);
                 UserManager.getInstance().save();
                 closeWindow();
-            }else{
+            } else {
                 messageText.setText("Please enter a task name");
             }
-        }else{
+        } else {
             messageText.setText("Please select a task type");
         }
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * Sets the current user to whom the new task will be added.
+     *
+     * @param user the current user
+     */
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }

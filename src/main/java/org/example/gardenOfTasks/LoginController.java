@@ -13,7 +13,10 @@ import model.User;
 import util.ViewSwitcher;
 
 import java.io.IOException;
-
+/**
+ * Controller class for handling login and registration functionality.
+ * Includes animated transitions between login and signup panels.
+ */
 public class LoginController {
     private final TranslateTransition slide;
     private final UserManager um;
@@ -61,12 +64,17 @@ public class LoginController {
     private JFXButton switchToLoginBtn;
 
     private final ViewSwitcher switcher = new ViewSwitcher();
+    /**
+     * Constructor initializes UserManager and transition animation.
+     */
 
     public LoginController() throws IOException, ClassNotFoundException {
         this.um = UserManager.getInstance();
         this.slide = new TranslateTransition();
     }
-
+    /**
+     * Initializes the UI, only the login page visible.
+     */
     @FXML
     void initialize() {
         signUpPassword.setVisible(false);
@@ -76,6 +84,9 @@ public class LoginController {
         b1.setVisible(false);
         signUpButton.setVisible(false);
     }
+    /**
+     * Switches from signup panel back to log in panel with animation.
+     */
     @FXML
     void switchToLogin() {
         hideSignUpPage();
@@ -85,7 +96,9 @@ public class LoginController {
         slide.play();
         showLoginPage();
     }
-
+    /**
+     * Switches from login panel to signup panel with animation.
+     */
     @FXML
     void switchToSignUp() {
         hideLoginPage();
@@ -95,7 +108,9 @@ public class LoginController {
         slide.play();
         showSignUpPage();
     }
-
+    /**
+     * Handles login logic. If user exist, switches to main page.
+     */
     @FXML
     void login() throws IOException, ClassNotFoundException {
         User user = um.login(loginUsername.getText(), loginPassword.getText());
@@ -107,9 +122,11 @@ public class LoginController {
             text.setText("Invalid Username or Password");
         }
     }
-
+    /**
+     * Handles user registration. Checks if passwords match and user does not already exist.
+     */
     @FXML
-    void register() throws IOException, ClassNotFoundException {
+    void register() throws IOException {
         text.setVisible(true);
         if (signUpPassword.getText().equals(signUpPassword2.getText())) {
             if (!um.getUsers().containsKey(signUpUsername.getText())) {
@@ -122,7 +139,9 @@ public class LoginController {
             text.setText("Passwords do not match");
         }
     }
-
+    /**
+     * Hides UI elements related to log in view.
+     */
     private void hideLoginPage() {
         text1.setVisible(false);
         text.setVisible(false);
@@ -132,7 +151,9 @@ public class LoginController {
         loginPassword.setVisible(false);
         switchToSignBtn.setVisible(false);
     }
-
+    /**
+     * Hides UI elements related to signup view.
+     */
     private void hideSignUpPage() {
         b1.setVisible(false);
         signUpButton.setVisible(false);
@@ -141,7 +162,9 @@ public class LoginController {
         signUpUsername.setVisible(false);
         switchToLoginBtn.setVisible(false);
     }
-
+    /**
+     * Shows login panel components.
+     */
     private void showLoginPage() {
         text.setVisible(false);
         switchToSignBtn.setVisible(true);
@@ -151,7 +174,9 @@ public class LoginController {
         a1.setVisible(true);
         text1.setVisible(false);
     }
-
+    /**
+     * Shows signup panel components.
+     */
     private void showSignUpPage() {
         b1.setVisible(true);
         signUpButton.setVisible(true);

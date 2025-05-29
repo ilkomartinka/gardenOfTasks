@@ -20,7 +20,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
+/**
+ * Controller that handle the shop scene.
+ * It loads available plants from a file, displays them in a grid, and
+ * manages the purchase process where users can spend coins to buy plants.
+ */
 @SuppressWarnings("CallToPrintStackTrace")
 public class ShopController {
 
@@ -60,26 +64,41 @@ public class ShopController {
 
     @FXML
     private Text errorMessage;
-
+    /**
+     * Constructor initializing view switcher.
+     */
     public ShopController() {
         switcher = new ViewSwitcher();
     }
-
+    /**
+     * Switches the view to the garden scene.
+     */
     @FXML
     void goToGarden() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
-
+    /**
+     * Switches the view to the main (home) scene.
+     */
     @FXML
     void goToHome() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
-
+    /**
+     * Returns the list of available plants.
+     *
+     * @return list of plants loaded from file.
+     */
     public ArrayList<Plant> getPlants() {
         plants = loadPlants();
         return plants;
     }
-
+    /**
+     * Loads plant data from "plants.txt".
+     * Each line in the file should follow the format: name,price,imagePath
+     *
+     * @return list of plant objects
+     */
     @SuppressWarnings("CallToPrintStackTrace")
     private ArrayList<Plant> loadPlants() {
         plants = new ArrayList<>();
@@ -97,7 +116,11 @@ public class ShopController {
         }
         return plants;
     }
-
+    /**
+     * Displays the selected plant details (image, name, price).
+     *
+     * @param plant the selected plant
+     */
     public void setChosenPlant(Plant plant) {
         this.chosenPlant = plant;
         plantNameLabel.setText(plant.getName());
@@ -106,10 +129,17 @@ public class ShopController {
         plantImage.setImage(image);
     }
 
+    /**
+     * Returns the currently selected plant.
+     *
+     * @return selected plant
+     */
     public Plant getChosenPlant() {
         return chosenPlant;
     }
-
+    /**
+     * Initializes the shop UI: loads plants and sets grid.
+     */
     @FXML
     void initialize() {
         plants = getPlants();
@@ -140,7 +170,11 @@ public class ShopController {
         grid.setMaxWidth(Region.USE_PREF_SIZE);
         grid.setMaxHeight(Region.USE_PREF_SIZE);
     }
-
+    /**
+     * Manages the process of buying the selected plant.
+     * If the user has enough coins, the plant is added to their collection.
+     * Updates UI and shows feedback messages.
+     */
     @FXML
     void buyPlant() throws IOException, ClassNotFoundException {
         if(currentUser.getCoins() >= chosenPlant.getPrice()) {
@@ -154,12 +188,14 @@ public class ShopController {
             congratulationText.setVisible(false);
             errorMessage.setVisible(true);
         }
-
     }
-
+    /**
+     * Sets the current user and updates the coins label in the UI.
+     *
+     * @param user the current logged-in user
+     */
     public void setCurrentUser(User user) {
         this.currentUser = user;
         currentUser.updateCoins(usersCoins);
     }
-
 }

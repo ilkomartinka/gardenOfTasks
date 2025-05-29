@@ -12,8 +12,20 @@ import org.example.gardenOfTasks.TaskController;
 
 import java.io.IOException;
 
+/**
+ * Utility class for switching between different scenes in my JavaFX application.
+ */
 public class ViewSwitcher {
-    // Switch scene using given FXML file and Stage
+    /**
+     * Switches the current window (stage) to a new scene defined by the specified FXML file.
+     * Also passes the logged-in user to the corresponding controller.
+     *
+     * @param stage the current stage to update
+     * @param fxml  the path to the FXML file
+     * @param user  the currently logged-in user to pass to the new controller
+     * @throws IOException if loading the FXML fails
+     * @throws ClassNotFoundException if there is a problem with object serialization (user data)
+     */
     public  void switchToScene(Stage stage, String fxml, User user) throws IOException, ClassNotFoundException {
         FXMLLoader fxmlLoader = new FXMLLoader(ViewSwitcher.class.getResource(fxml));
         Parent root = fxmlLoader.load();

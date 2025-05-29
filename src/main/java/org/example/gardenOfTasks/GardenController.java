@@ -14,7 +14,10 @@ import util.ViewSwitcher;
 
 import java.io.IOException;
 import java.util.HashSet;
-
+/**
+ * Controller for the garden scene.
+ * Displays the user's purchased plants and allows navigation between scenes.
+ */
 @SuppressWarnings("CallToPrintStackTrace")
 public class GardenController {
 
@@ -32,6 +35,9 @@ public class GardenController {
     private GridPane grid;
 
 
+    /**
+     * Constructor initializes the ViewSwitcher.
+     */
     public GardenController() {
         this.switcher = new ViewSwitcher();
     }
@@ -40,22 +46,32 @@ public class GardenController {
     @FXML
     void initialize() {
     }
-
+    /**
+     * Navigates the user to the Home (main) page.
+     */
     @FXML
-    void goToHome() throws IOException {
+    void goToHome() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
-
+    /**
+     * Navigates the user to the Shop page.
+     */
     @FXML
-    void goToShop() throws IOException {
+    void goToShop() throws IOException, ClassNotFoundException {
         switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenOfTasks/shop.fxml", currentUser);
     }
-
+    /**
+     * Sets the current user and displays their plants.
+     * @param user the currently logged-in user
+     */
     public void setCurrentUser(User user) {
         this.currentUser = user;
         showUserPlants();
     }
-
+    /**
+     * Displays the user's owned plants in a grid.
+     * Each plant is shown as an image.
+     */
     public void showUserPlants() {
         HashSet<Plant> userPlants = currentUser.getPlants();
         int row = 0;
