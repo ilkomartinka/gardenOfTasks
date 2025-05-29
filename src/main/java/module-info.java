@@ -3,6 +3,7 @@ module org.example.gardenOfTasks {
     requires javafx.fxml;
     requires com.jfoenix;
     requires java.desktop;
+    requires org.junit.jupiter.api;
 
     opens org.example.gardenOfTasks to javafx.fxml;
     opens model to javafx.fxml;
