@@ -40,6 +40,7 @@ public class ViewSwitcher {
             ((AddTaskController) controller).setCurrentUser(user);
         }
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 }

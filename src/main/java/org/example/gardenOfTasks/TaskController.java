@@ -36,13 +36,13 @@ import java.util.Random;
 public class TaskController {
     private final ViewSwitcher switcher = new ViewSwitcher();
     private final Stage stage = new Stage();
+    public ToggleGroup group1;
     private User currentUser;
 
     @FXML
-    private Button gardenBtn;
-
+    private ToggleButton gardenBtn;
     @FXML
-    private Button shopBtn;
+    private ToggleButton shopBtn;
 
     @FXML
     private JFXListView<Task> taskList;
@@ -148,9 +148,8 @@ public class TaskController {
      *
      * @param user the current logged-in user
      */
-    public void setCurrentUser(User user) throws IOException, ClassNotFoundException {
+    public void setCurrentUser(User user){
         this.currentUser = user;
-        setupTaskListView();
         user.updateCoins(usersCoins);
         taskManager.displayTasks(currentUser, taskList);
         flowersPlantedLabel.setText(String.valueOf(currentUser.getPlants().size()));
@@ -207,6 +206,7 @@ public class TaskController {
         Tooltip.install(taskLine, tooltip);
         return taskLine;
     }
+
     /**
      * Creates a label that displays the task's type.
      *
@@ -219,6 +219,7 @@ public class TaskController {
         label.setStyle("-fx-font-size: 16px;-fx-font-weight: bold; -fx-text-fill: black;");
         return label;
     }
+
     /**
      * Creates a label that displays the task's name.
      * The label is styled, left-aligned, and wraps text if it is too long.
@@ -234,6 +235,7 @@ public class TaskController {
         label.setMaxWidth(Region.USE_COMPUTED_SIZE);
         return label;
     }
+
     /**
      * Creates a checkbox for marking a task as completed or not.
      * Handles updating the task status, user's coins, done tasks count,
@@ -263,6 +265,7 @@ public class TaskController {
         });
         return checkBox;
     }
+
     /**
      * Creates a label that displays the reward value of a task.
      *

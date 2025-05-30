@@ -23,13 +23,19 @@
     -fx-background-color: #1e5b3a;
     -fx-background-radius: 20;
 }
-
+.toggle-button{
+    -fx-background-color: #000000;
+    -fx-background-radius: 30px;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
 .toggle-button:selected {
     -fx-background-color: white;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-border-color: white;
     -fx-border-width: 2px;
-    -fx-border-radius: 15px;
+    -fx-border-radius: 30px;
 }
 
 .list-cell {
