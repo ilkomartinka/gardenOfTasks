@@ -83,7 +83,7 @@ public  class UserManager {
      * @throws IOException if loading users fails.
      * @throws ClassNotFoundException if deserialization fails.
      */
-    public static UserManager getInstance() throws IOException, ClassNotFoundException {
+    public static UserManager getInstance() throws IOException, ClassNotFoundException { //Singleton method from https://www.baeldung.com/java-singleton
         if (instance == null) {
             instance = new UserManager();
         }

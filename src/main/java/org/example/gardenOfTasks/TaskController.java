@@ -20,9 +20,7 @@ import manager.TaskManager;
 import model.User;
 import util.ViewSwitcher;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -86,7 +84,7 @@ public class TaskController {
      * Opens the Add Task page and refreshes the task list and user data after the window is closed.
      */
     @FXML
-    void addTaskBtn() throws IOException, ClassNotFoundException {
+    void addTaskBtn() throws IOException {
         switcher.switchToScene(stage, "/org/example/gardenOfTasks/addTaskPage.fxml", currentUser);
         stage.setOnHiding(event -> {
             try {
@@ -104,7 +102,7 @@ public class TaskController {
      * Navigates to the garden scene.
      */
     @FXML
-    void goToGarden() throws IOException, ClassNotFoundException {
+    void goToGarden() throws IOException {
         switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
 
@@ -112,7 +110,7 @@ public class TaskController {
      * Navigates to the shop scene.
      */
     @FXML
-    void goToShop() throws IOException, ClassNotFoundException {
+    void goToShop() throws IOException {
         switcher.switchToScene((Stage) shopBtn.getScene().getWindow(), "/org/example/gardenOfTasks/shop.fxml", currentUser);
     }
 
@@ -164,7 +162,7 @@ public class TaskController {
     /**
      * Sets up the visual representation of tasks using a custom ListCell.
      */
-    private void setupTaskListView() throws IOException, ClassNotFoundException {
+    private void setupTaskListView() throws IOException, ClassNotFoundException {  //https://www.baeldung.com/javafx-listview-display-custom-items
         taskList.setCellFactory(listView -> new ListCell<>() {
             @Override
             protected void updateItem(Task task, boolean empty) {
@@ -284,7 +282,7 @@ public class TaskController {
      * Loads motivational quotes from a text file.
      */
     private void loadQuotesFromFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("quotes.txt"))) {
+        try (BufferedReader reader = new BufferedReader((new InputStreamReader((this.getClass().getResourceAsStream("/files/quotes.txt")))))){
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.isEmpty()) {
@@ -306,7 +304,7 @@ public class TaskController {
                 for (int i = 0; i < quotes.size(); i++) {
                     int randomIndex = new Random().nextInt(quotes.size());
                     String quote = quotes.get(randomIndex);
-                    Platform.runLater(() -> quoteLabel.setText(quote));
+                    Platform.runLater(() -> quoteLabel.setText(quote)); // This quote-changing logic (using Thread + Platform.runLater) was implemented with help from ChatGPT
                     quoteLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20px; -fx-font-weight: bold");
                     quoteLabel.setAlignment(Pos.CENTER);
                     quoteLabel.setWrapText(true);
@@ -340,6 +338,7 @@ public class TaskController {
     /**
      * Starts and manages countdown logic, updates the timer label every second.
      */
+    // Countdown logic (Timeline with KeyFrame) inspired by JavaFX examples and adjusted with help from ChatGPT
     private void startCountdown() {
         updateTimeLabel();
         countdownTimeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {

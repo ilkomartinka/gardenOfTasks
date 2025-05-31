@@ -6,7 +6,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import manager.UserManager;
 import model.Task;
-import manager.TaskManager;
 import model.TaskType;
 import model.User;
 
@@ -19,14 +18,6 @@ import java.io.IOException;
 
 public class AddTaskController {
     private User currentUser;
-    private final TaskManager taskManager;
-
-    /**
-     * Constructor that initializes the TaskManager instance.
-     */
-    public AddTaskController() {
-        taskManager = TaskManager.getInstance();
-    }
 
     @FXML
     private JFXTextArea descriptionTextArea;
@@ -68,7 +59,6 @@ public class AddTaskController {
         if (taskTypeComboBox.getValue() != null) {
             if (!taskTextField.getText().isEmpty()) {
                 currentUser.addTask(newTask);
-                taskManager.addTask(newTask);
                 UserManager.getInstance().save();
                 closeWindow();
             } else {
@@ -78,14 +68,7 @@ public class AddTaskController {
             messageText.setText("Please select a task type");
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     /**
      * Sets the current user to whom the new task will be added.
      *

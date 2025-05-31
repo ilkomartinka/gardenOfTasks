@@ -6,94 +6,73 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="556.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenOfTasks.LoginController">
-   <AnchorPane prefHeight="558.0" prefWidth="856.0" styleClass="background-center"
-               stylesheets="@../../../assets/stylesheet.css">
-      <AnchorPane fx:id="sliderPane" layoutX="438.0" prefHeight="558.0" prefWidth="420.0"
-                  style="-fx-background-color: #000000;" styleClass="background-right"
-                  stylesheets="@../../../assets/stylesheet.css">
-         <Text fx:id="a1" fill="WHITE" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="WELCOME" textAlignment="CENTER" wrappingWidth="246.13671875">
+<AnchorPane prefHeight="556.0" prefWidth="856.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.gardenOfTasks.LoginController">
+   <AnchorPane prefHeight="558.0" prefWidth="856.0" styleClass="background-center" stylesheets="@../../../assets/stylesheet.css">
+      <AnchorPane fx:id="sliderPane" layoutX="438.0" prefHeight="558.0" prefWidth="420.0" style="-fx-background-color: #000000;" styleClass="background-right" stylesheets="@../../../assets/stylesheet.css">
+         <Text fx:id="a1" fill="WHITE" layoutX="83.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="246.13671875">
             <font>
-               <Font name="Bauhaus 93" size="43.0"/>
+               <Font name="Bauhaus 93" size="43.0" />
             </font>
          </Text>
-         <Text fx:id="text" fill="#4e8650" layoutX="49.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0"
-               wrappingWidth="326.1367492675781">
+         <Text fx:id="text" fill="#4e8650" layoutX="49.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="326.1367492675781">
             <font>
-               <Font name="System Bold" size="18.0"/>
+               <Font name="System Bold" size="18.0" />
             </font>
          </Text>
-         <JFXTextField fx:id="loginPassword" focusColor="WHITE" labelFloat="true" layoutX="52.0" layoutY="291.0"
-                       prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
+         <JFXTextField fx:id="loginPassword" focusColor="WHITE" labelFloat="true" layoutX="52.0" layoutY="291.0" prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
             <font>
-               <Font name="System Bold" size="16.0"/>
+               <Font name="System Bold" size="16.0" />
             </font>
          </JFXTextField>
       </AnchorPane>
-      <JFXButton fx:id="switchToSignBtn" buttonType="RAISED" layoutX="356.0" layoutY="9.0" onAction="#switchToSignUp"
-                 prefHeight="47.0" prefWidth="81.0" ripplerFill="#29381f" style="-fx-background-color: #000000;"
-                 styleClass="btn" text="&lt; SIGN UP" textFill="WHITE">
+      <JFXButton fx:id="switchToSignBtn" buttonType="RAISED" layoutX="356.0" layoutY="9.0" onAction="#switchToSignUp" prefHeight="47.0" prefWidth="81.0" ripplerFill="#29381f" style="-fx-background-color: #000000;" styleClass="btn" text="&lt; SIGN UP" textFill="WHITE">
          <font>
-            <Font name="Bauhaus 93" size="14.0"/>
+            <Font name="Bauhaus 93" size="14.0" />
          </font>
       </JFXButton>
-      <Text fx:id="b1" fill="WHITE" layoutX="93.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            text="WELCOME" textAlignment="CENTER" wrappingWidth="246.13671875">
+      <Text fx:id="b1" fill="WHITE" layoutX="93.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" wrappingWidth="246.13671875">
          <font>
-            <Font name="Bauhaus 93" size="43.0"/>
+            <Font name="Bauhaus 93" size="43.0" />
          </font>
       </Text>
-      <JFXTextField fx:id="signUpUsername" focusColor="WHITE" labelFloat="true" layoutX="64.0" layoutY="161.0"
-                    prefHeight="37.0" prefWidth="311.0" promptText="Username" unFocusColor="WHITE">
+      <JFXTextField fx:id="signUpUsername" focusColor="WHITE" labelFloat="true" layoutX="64.0" layoutY="161.0" prefHeight="37.0" prefWidth="311.0" promptText="Username" unFocusColor="WHITE">
          <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="signUpPassword" focusColor="WHITE" labelFloat="true" layoutX="63.0" layoutY="223.0"
-                    prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
+      <JFXTextField fx:id="signUpPassword" focusColor="WHITE" labelFloat="true" layoutX="63.0" layoutY="223.0" prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
          <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="signUpPassword2" focusColor="WHITE" labelFloat="true" layoutX="63.0" layoutY="290.0"
-                    prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
+      <JFXTextField fx:id="signUpPassword2" focusColor="WHITE" labelFloat="true" layoutX="63.0" layoutY="290.0" prefHeight="26.0" prefWidth="313.0" promptText="Password" unFocusColor="WHITE">
          <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="signUpButton" layoutX="168.0" layoutY="395.0" onAction="#register" prefHeight="44.0"
-                 prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Sign up"
-                 textFill="#cccaca">
+      <JFXButton fx:id="signUpButton" layoutX="168.0" layoutY="395.0" onAction="#register" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Sign up" textFill="#cccaca">
          <font>
-            <Font name="System Bold" size="17.0"/>
+            <Font name="System Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="loginButton" layoutX="577.0" layoutY="389.0" onAction="#login" prefHeight="44.0"
-                 prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Login"
-                 textFill="#cccaca">
+      <JFXButton fx:id="loginButton" layoutX="577.0" layoutY="389.0" onAction="#login" prefHeight="44.0" prefWidth="98.0" styleClass="btn" stylesheets="@../../../assets/stylesheet.css" text="Login" textFill="#cccaca">
          <font>
-            <Font name="System Bold" size="17.0"/>
+            <Font name="System Bold" size="17.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="switchToLoginBtn" buttonType="RAISED" layoutX="420.0" layoutY="9.0" onAction="#switchToLogin"
-                 prefHeight="47.0" prefWidth="81.0" ripplerFill="#29381f" style="-fx-background-color: #000000;"
-                 styleClass="btn" text="LOGIN &gt;" textFill="WHITE">
+      <JFXButton fx:id="switchToLoginBtn" buttonType="RAISED" layoutX="420.0" layoutY="9.0" onAction="#switchToLogin" prefHeight="47.0" prefWidth="81.0" ripplerFill="#29381f" style="-fx-background-color: #000000;" styleClass="btn" text="LOGIN &gt;" textFill="WHITE">
          <font>
-            <Font name="Bauhaus 93" size="14.0"/>
+            <Font name="Bauhaus 93" size="14.0" />
          </font>
       </JFXButton>
-      <JFXTextField fx:id="loginUsername" focusColor="WHITE" labelFloat="true" layoutX="486.0" layoutY="214.0"
-                    prefHeight="37.0" prefWidth="311.0" promptText="Username" unFocusColor="WHITE">
+      <JFXTextField fx:id="loginUsername" focusColor="WHITE" labelFloat="true" layoutX="486.0" layoutY="216.0" prefHeight="37.0" prefWidth="311.0" promptText="Username" unFocusColor="WHITE">
          <font>
-            <Font name="System Bold" size="16.0"/>
+            <Font name="System Bold" size="16.0" />
          </font>
       </JFXTextField>
-      <Text fx:id="text1" fill="#4e8650" layoutX="48.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0"
-            wrappingWidth="326.1367492675781">
+      <Text fx:id="text1" fill="#4e8650" layoutX="48.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="326.1367492675781">
          <font>
-            <Font name="System Bold" size="18.0"/>
+            <Font name="System Bold" size="18.0" />
          </font>
       </Text>
    </AnchorPane>

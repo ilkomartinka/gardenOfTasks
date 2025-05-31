@@ -35,15 +35,20 @@ public class PlantController {
      * @param shopController The parent shop controller that handles selection.
      */
     public void setPlant(Plant plant, ShopController shopController) {
-        this.plant = plant;
+        setPlant(plant);
         nameLabel.setText(plant.getName());
         priceLabel.setText(String.valueOf(plant.getPrice()));
         Image image = new Image(getClass().getResourceAsStream(plant.getImgSrc()));
         imageView.setImage(image);
-        // Allow user to select this plant
-        plantPane.setOnMouseClicked(event -> {
-            shopController.setChosenPlant(plant);
-        });
+        // Allow user to select a plant
+        plantPane.setOnMouseClicked(event -> shopController.setChosenPlant(plant));
     }
 
+    public Plant getPlant() {
+        return plant;
+    }
+
+    public void setPlant(Plant plant) {
+        this.plant = plant;
+    }
 }

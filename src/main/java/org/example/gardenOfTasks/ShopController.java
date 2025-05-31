@@ -3,7 +3,6 @@ package org.example.gardenOfTasks;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
@@ -17,9 +16,7 @@ import model.Plant;
 import model.User;
 import util.ViewSwitcher;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 /**
  * Controller that handle the shop scene.
@@ -65,26 +62,30 @@ public class ShopController {
 
     @FXML
     private Text errorMessage;
+
     /**
      * Constructor initializing view switcher.
      */
     public ShopController() {
         switcher = new ViewSwitcher();
     }
+
     /**
      * Switches the view to the garden scene.
      */
     @FXML
-    void goToGarden() throws IOException, ClassNotFoundException {
+    void goToGarden() throws IOException {
         switcher.switchToScene((Stage) gardenBtn.getScene().getWindow(), "/org/example/gardenOfTasks/garden.fxml", currentUser);
     }
+
     /**
      * Switches the view to the main (home) scene.
      */
     @FXML
-    void goToHome() throws IOException, ClassNotFoundException {
+    void goToHome() throws IOException{
         switcher.switchToScene((Stage) homeBtn.getScene().getWindow(), "/org/example/gardenOfTasks/mainPage.fxml", currentUser);
     }
+
     /**
      * Returns the list of available plants.
      *
@@ -94,6 +95,7 @@ public class ShopController {
         plants = loadPlants();
         return plants;
     }
+
     /**
      * Loads plant data from "plants.txt".
      * Each line in the file should follow the format: name,price,imagePath
@@ -103,20 +105,23 @@ public class ShopController {
     @SuppressWarnings("CallToPrintStackTrace")
     private ArrayList<Plant> loadPlants() {
         plants = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader("plants.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
-                String plantName = parts[0];
-                int price = Integer.parseInt(parts[1]);
-                String image = parts[2];
-                plants.add(new Plant(plantName, price, image));
-            }
-        } catch (IOException e) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/files/plants.txt")))) {
+                 String line;
+            while((line =br.readLine())!=null)
+
+                 {
+                     String[] parts = line.split(",");
+                     String plantName = parts[0];
+                     int price = Integer.parseInt(parts[1]);
+                     String image = parts[2];
+                     plants.add(new Plant(plantName, price, image));
+                 }
+             } catch(IOException e) {
             e.printStackTrace();
         }
         return plants;
     }
+
     /**
      * Displays the selected plant details (image, name, price).
      *
@@ -138,6 +143,7 @@ public class ShopController {
     public Plant getChosenPlant() {
         return chosenPlant;
     }
+
     /**
      * Initializes the shop UI: loads plants and sets grid.
      */
@@ -171,6 +177,7 @@ public class ShopController {
         grid.setMaxWidth(Region.USE_PREF_SIZE);
         grid.setMaxHeight(Region.USE_PREF_SIZE);
     }
+
     /**
      * Manages the process of buying the selected plant.
      * If the user has enough coins, the plant is added to their collection.
@@ -178,18 +185,19 @@ public class ShopController {
      */
     @FXML
     void buyPlant() throws IOException, ClassNotFoundException {
-        if(currentUser.getCoins() >= chosenPlant.getPrice()) {
+        if (currentUser.getCoins() >= chosenPlant.getPrice()) {
             currentUser.removeCoins(getChosenPlant().getPrice());
             usersCoins.setText(String.valueOf(currentUser.getCoins()));
             currentUser.addPlant(chosenPlant);
             errorMessage.setVisible(false);
             congratulationText.setVisible(true);
             currentUser.updateCoins(usersCoins);
-        }else{
+        } else {
             congratulationText.setVisible(false);
             errorMessage.setVisible(true);
         }
     }
+
     /**
      * Sets the current user and updates the coins label in the UI.
      *

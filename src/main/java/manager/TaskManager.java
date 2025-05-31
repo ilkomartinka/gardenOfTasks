@@ -1,7 +1,5 @@
 package manager;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import model.Task;
 import model.User;
@@ -12,34 +10,14 @@ import java.io.IOException;
  * TaskManager handles task-related actions like adding, completing, and displaying tasks.
  */
 public class TaskManager {
-    private final ObservableList<Task> tasks;
     private static TaskManager instance;
-
-    /**
-     * Constructor creates an empty list of tasks.
-     */
-    public TaskManager() {
-        this.tasks = FXCollections.observableArrayList();
-    }
-
-    /**
-     * Adds a new task and saves the user data.
-     *
-     * @param task the task to be added
-     * @throws IOException            if saving fails
-     * @throws ClassNotFoundException if user data cannot be loaded
-     */
-    public void addTask(Task task) throws IOException, ClassNotFoundException {
-        tasks.add(task);
-        UserManager.getInstance().save();
-    }
 
     /**
      * Returns the singleton instance of TaskManager.
      *
      * @return instance of TaskManager
      */
-    public static TaskManager getInstance() {
+    public static TaskManager getInstance() { //Singleton method from https://www.baeldung.com/java-singleton
         if (instance == null) {
             instance = new TaskManager();
         }
@@ -55,6 +33,7 @@ public class TaskManager {
     public void displayTasks(User currentUser, ListView<Task> taskList) {
         taskList.getItems().setAll(currentUser.getTasks());
     }
+
     /**
      * Clears all tasks.
      *
@@ -63,12 +42,13 @@ public class TaskManager {
     public void clearTasks(User currentUser) {
         currentUser.getTasks().clear();
     }
+
     /**
      * Marks a task as completed and gives the reward if not already given.
      *
      * @param task the task to complete
      * @param user the user who completed the task
-     * @throws IOException if saving fails
+     * @throws IOException            if saving fails
      * @throws ClassNotFoundException if user data cannot be loaded
      */
     public void completeTask(Task task, User user) throws IOException, ClassNotFoundException {
@@ -86,7 +66,7 @@ public class TaskManager {
      * Marks a task as not completed.
      *
      * @param task the task to uncomplete
-     * @throws IOException if saving fails
+     * @throws IOException            if saving fails
      * @throws ClassNotFoundException if user data cannot be loaded
      */
     public void uncompleteTask(Task task) throws IOException, ClassNotFoundException {
@@ -95,7 +75,6 @@ public class TaskManager {
             UserManager.getInstance().save();
         }
     }
-
 
     /**
      * Returns the number of completed tasks.

@@ -26,12 +26,9 @@ public class UserTest {
 
     @Test
     void testAddTask() throws IOException, ClassNotFoundException {
-
         model.Task task = new model.Task("Test task", TaskType.HOMEWORK, "Test description");
-
         user.addTask(task);
         ArrayList<Task> tasks = user.getTasks();
-
         assertEquals(1, tasks.size(), "Task list should contain 1 task");
         assertEquals(task, tasks.getFirst(), "Task added should be the one created");
     }

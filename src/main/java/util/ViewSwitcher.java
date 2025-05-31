@@ -24,9 +24,8 @@ public class ViewSwitcher {
      * @param fxml  the path to the FXML file
      * @param user  the currently logged-in user to pass to the new controller
      * @throws IOException if loading the FXML fails
-     * @throws ClassNotFoundException if there is a problem with object serialization (user data)
      */
-    public  void switchToScene(Stage stage, String fxml, User user) throws IOException, ClassNotFoundException {
+    public  void switchToScene(Stage stage, String fxml, User user) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ViewSwitcher.class.getResource(fxml));
         Parent root = fxmlLoader.load();
         Object controller = fxmlLoader.getController();

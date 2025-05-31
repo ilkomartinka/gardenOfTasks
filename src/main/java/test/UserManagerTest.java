@@ -19,22 +19,19 @@ public class UserManagerTest {
         }
 
         @Test
-        void testRegisterAndLoginSuccess() throws IOException, ClassNotFoundException {
+        void testRegisterAndLoginSuccess() throws IOException{
             String username = "testUser";
             String password = "testPass";
-
             userManager.register(username, password);
             User loggedInUser = userManager.login(username, password);
-
             assertNotNull(loggedInUser);
             assertEquals(username, loggedInUser.toString().contains(username) ? username : null);
         }
 
         @Test
-        void testLoginWithWrongPassword() throws IOException {
+        void testLoginWithWrongPassword()  {
             String username = "testUser";
             String wrongPassword = "wrongPass";
-
             User result = userManager.login(username, wrongPassword);
             assertNull(result);
         }

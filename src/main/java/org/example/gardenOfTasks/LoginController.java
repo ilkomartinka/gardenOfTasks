@@ -112,7 +112,7 @@ public class LoginController {
      * Handles login logic. If user exist, switches to main page.
      */
     @FXML
-    void login() throws IOException, ClassNotFoundException {
+    void login() throws IOException {
         User user = um.login(loginUsername.getText(), loginPassword.getText());
         if (user != null) {
             Stage stage = (Stage) switchToLoginBtn.getScene().getWindow();
